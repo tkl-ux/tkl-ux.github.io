@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#070a18" />
+  <title>HKDSE 中五中國歷史｜課題1：民初政局（首三章 90題觸控版）</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Noto Sans TC & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Inter"', '"Noto Sans TC"', 'sans-serif'],
+          },
+          colors: {
+            aurora: {
+              bg: '#070a18',
+              indigo: '#312e81',
+              violet: '#4c1d95',
+              cyan: '#0e7490',
+              emerald: '#065f46'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+    }
+
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #070a18;
+      color: #f8fafc;
+      font-family: 'Inter', 'Noto Sans TC', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      overscroll-behavior-y: none;
+    }
+
+    /* GPU 加速深色極光背景光斑 */
+    .aurora-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background: radial-gradient(circle at 50% 0%, #11183c 0%, #070a18 75%);
+    }
+
+    .aurora-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(75px);
+      opacity: 0.55;
+      will-change: transform;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .blob-1 {
+      width: 55vw;
+      height: 55vw;
+      max-width: 520px;
+      max-height: 520px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.75), rgba(67, 56, 202, 0.1));
+      top: -10%;
+      left: -10%;
+      animation: floatBlob1 18s ease-in-out infinite alternate;
+    }
+
+    .blob-2 {
+      width: 60vw;
+      height: 60vw;
+      max-width: 560px;
+      max-height: 560px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.65), rgba(88, 28, 135, 0.1));
+      top: 25%;
+      right: -15%;
+      animation: floatBlob2 22s ease-in-out infinite alternate;
+    }
+
+    .blob-3 {
+      width: 50vw;
+      height: 50vw;
+      max-width: 480px;
+      max-height: 480px;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.55), rgba(6, 182, 212, 0.08));
+      bottom: -10%;
+      left: 15%;
+      animation: floatBlob3 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBlob1 {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      100% { transform: translate3d(12vw, 8vh, 0) scale(1.12); }
+    }
+    @keyframes floatBlob2 {
+      0% { transform: translate3d(0, 0, 0) scale(1.05); }
+      100% { transform: translate3d(-14vw, -6vh, 0) scale(0.95); }
+    }
+    @keyframes floatBlob3 {
+      0% { transform: translate3d(0, 0, 0) scale(0.95); }
+      100% { transform: translate3d(10vw, -10vh, 0) scale(1.1); }
+    }
+
+    /* 液態玻璃核心材質 (Liquid Glass) */
+    .liquid-glass {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.11) 0%, rgba(255, 255, 255, 0.04) 100%);
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 10px 32px -6px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+    }
+
+    .liquid-glass-strong {
+      background: linear-gradient(160deg, rgba(20, 27, 56, 0.85) 0%, rgba(11, 16, 36, 0.92) 100%);
+      backdrop-filter: blur(26px) saturate(190%);
+      -webkit-backdrop-filter: blur(26px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.55), inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+    }
+
+    .liquid-pill {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .liquid-pill:active {
+      transform: scale(0.96);
+    }
+
+    .liquid-pill.active {
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.65), rgba(56, 189, 248, 0.55));
+      border-color: rgba(165, 180, 252, 0.65);
+      box-shadow: 0 4px 16px rgba(99, 102, 241, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+      font-weight: 700;
+    }
+
+    /* 隱藏橫向捲軸但保留流暢滑動 */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* 觸控選項按鈕至少 48px 高度與回饋 */
+    .touch-option-btn {
+      min-height: 52px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .touch-option-btn:active:not(:disabled) {
+      transform: scale(0.985);
+      background: rgba(255, 255, 255, 0.13);
+    }
+
+    /* 防止 iOS 自動放大：輸入框字體強制 >= 16px */
+    .ios-safe-input {
+      font-size: 16px !important;
+      line-height: 1.4;
+      min-height: 48px;
+    }
+
+    /* 時序題拖曳與觸控樣式 */
+    .sort-item {
+      touch-action: pan-y;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.2s ease;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .sort-item.dragging {
+      opacity: 0.92;
+      transform: scale(1.02);
+      background: rgba(99, 102, 241, 0.32);
+      border-color: rgba(165, 180, 252, 0.8);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+      z-index: 30;
+    }
+
+    /* Bottom Sheet 抽屜動畫 */
+    .sheet-backdrop {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.28s ease;
+    }
+    .sheet-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .bottom-sheet {
+      transform: translate3d(0, 100%, 0);
+      transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+      padding-bottom: calc(1.25rem + var(--safe-bottom));
+    }
+    .sheet-backdrop.open .bottom-sheet {
+      transform: translate3d(0, 0, 0);
+    }
+
+    @media (min-width: 768px) {
+      .bottom-sheet {
+        transform: translate3d(0, 24px, 0) scale(0.96);
+        opacity: 0;
+        transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+        padding-bottom: 1.5rem;
+      }
+      .sheet-backdrop.open .bottom-sheet {
+        transform: translate3d(0, 0, 0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* 頂部與底部安全區域 */
+    .header-safe {
+      padding-top: calc(0.75rem + var(--safe-top));
+    }
+
+    .bottom-bar-safe {
+      padding-bottom: calc(0.65rem + var(--safe-bottom));
+    }
+
+    .main-content-pad {
+      padding-bottom: calc(6.5rem + var(--safe-bottom));
+    }
+  </style>
+</head>
+<body class="selection:bg-indigo-500/40 selection:text-white">
+
+  <!-- 深色極光流動背景 -->
+  <div class="aurora-canvas" aria-hidden="true">
+    <div class="aurora-blob blob-1"></div>
+    <div class="aurora-blob blob-2"></div>
+    <div class="aurora-blob blob-3"></div>
+  </div>
+
+  <!-- 頂部固定液態玻璃導航列 -->
+  <header class="sticky top-0 z-30 liquid-glass-strong header-safe px-3 sm:px-6 pb-3 border-b border-white/15">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-500 via-purple-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30 shrink-0">
+            <i class="fa-solid fa-landmark text-white text-base"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="text-[11px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-indigo-500/30 border border-indigo-400/40 text-indigo-200">HKDSE 中史</span>
+              <span class="text-[11px] text-cyan-300 font-medium truncate">首三章・90題精選</span>
+            </div>
+            <h1 class="text-base sm:text-lg font-extrabold text-white truncate tracking-tight mt-0.5">
+              課題1：民初政局（1912–1928）
+            </h1>
+          </div>
+        </div>
+
+        <!-- 頂部快捷功能按鈕（大觸控區） -->
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button id="btnOpenTimeline" type="button" class="liquid-pill min-h-[44px] px-3 rounded-2xl flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-cyan-200 hover:text-white" aria-label="開啟重點時間軸">
+            <i class="fa-solid fa-timeline text-cyan-400"></i>
+            <span>時間軸</span>
+          </button>
+          <button id="btnShuffle" type="button" class="liquid-pill min-h-[44px] w-11 sm:w-auto sm:px-3 rounded-2xl flex items-center justify-center gap-1.5 text-xs sm:text-sm font-semibold text-indigo-200 hover:text-white" title="隨機洗牌題目">
+            <i class="fa-solid fa-shuffle text-indigo-300"></i>
+            <span class="hidden sm:inline">洗牌</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 模式切換與統計數據列（手機2x2 / 平板4欄） -->
+      <div class="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2">
+        <!-- 模式切換雙膠囊 -->
+        <div class="col-span-2 liquid-glass rounded-2xl p-1 flex items-center gap-1">
+          <button id="modePractice" type="button" class="flex-1 min-h-[40px] rounded-xl text-xs sm:text-sm font-bold transition-all bg-gradient-to-r from-indigo-500 to-cyan-500 text-white shadow-md flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-bolt"></i>
+            <span>即時溫習模式</span>
+          </button>
+          <button id="modeExam" type="button" class="flex-1 min-h-[40px] rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all flex items-center justify-center gap-1.5">
+            <i class="fa-solid fa-file-pen"></i>
+            <span>模擬測驗模式</span>
+          </button>
+        </div>
+
+        <!-- 已答進度 -->
+        <div class="liquid-glass rounded-2xl px-3 py-1.5 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] text-slate-400 font-medium">完成進度</div>
+            <div class="text-sm sm:text-base font-extrabold text-white"><span id="statAnswered">0</span><span class="text-xs text-slate-400 font-normal"> / <span id="statTotal">90</span></span></div>
+          </div>
+          <div class="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center text-cyan-300 text-xs">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+        </div>
+
+        <!-- 正確率 / 錯題本 -->
+        <div class="liquid-glass rounded-2xl px-3 py-1.5 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] text-slate-400 font-medium">答對 / 錯題</div>
+            <div class="text-sm sm:text-base font-extrabold">
+              <span id="statCorrect" class="text-emerald-400">0</span>
+              <span class="text-slate-500 mx-0.5">/</span>
+              <span id="statWrong" class="text-rose-400">0</span>
+            </div>
+          </div>
+          <button id="btnToggleWrongOnly" type="button" class="min-h-[34px] px-2.5 rounded-xl bg-rose-500/20 border border-rose-400/35 text-rose-200 text-xs font-bold active:scale-95 transition" title="只看錯題">
+            只看錯題
+          </button>
+        </div>
+      </div>
+
+      <!-- 橫向滑動篩選器 1：章節篩選（嚴格限定首三章） -->
+      <div class="mt-2.5 flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-0.5" role="tablist" aria-label="章節篩選">
+        <button type="button" data-chapter="all" class="chapter-pill liquid-pill active shrink-0 min-h-[38px] px-3.5 rounded-full text-xs sm:text-sm">
+          全部首三章 (90)
+        </button>
+        <button type="button" data-chapter="1" class="chapter-pill liquid-pill shrink-0 min-h-[38px] px-3.5 rounded-full text-xs sm:text-sm text-slate-200">
+          第1章：袁世凱掌權 (1912–16)
+        </button>
+        <button type="button" data-chapter="2" class="chapter-pill liquid-pill shrink-0 min-h-[38px] px-3.5 rounded-full text-xs sm:text-sm text-slate-200">
+          第2章：北洋軍閥統治 (1916–28)
+        </button>
+        <button type="button" data-chapter="3" class="chapter-pill liquid-pill shrink-0 min-h-[38px] px-3.5 rounded-full text-xs sm:text-sm text-slate-200">
+          第3章：山東問題與五四 (1914–19)
+        </button>
+      </div>
+
+      <!-- 橫向滑動篩選器 2：題型與重置 -->
+      <div class="mt-2 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar" role="tablist" aria-label="題型篩選">
+          <button type="button" data-type="all" class="type-pill liquid-pill active shrink-0 min-h-[36px] px-3 rounded-full text-xs">
+            全部題型
+          </button>
+          <button type="button" data-type="mc" class="type-pill liquid-pill shrink-0 min-h-[36px] px-3 rounded-full text-xs text-slate-200">
+            <i class="fa-regular fa-circle-dot mr-1 text-cyan-300"></i>選擇題 (40)
+          </button>
+          <button type="button" data-type="fill" class="type-pill liquid-pill shrink-0 min-h-[36px] px-3 rounded-full text-xs text-slate-200">
+            <i class="fa-solid fa-pen-to-square mr-1 text-indigo-300"></i>填充題 (40)
+          </button>
+          <button type="button" data-type="sort" class="type-pill liquid-pill shrink-0 min-h-[36px] px-3 rounded-full text-xs text-slate-200">
+            <i class="fa-solid fa-arrow-down-1-9 mr-1 text-purple-300"></i>時序排列 (10)
+          </button>
+        </div>
+
+        <button id="btnResetAll" type="button" class="shrink-0 min-h-[36px] px-2.5 rounded-full bg-white/5 border border-white/10 text-[11px] text-slate-300 hover:text-white active:scale-95">
+          <i class="fa-solid fa-rotate-left mr-1"></i>重置
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 主內容區 -->
+  <main class="relative z-10 max-w-5xl mx-auto px-3 sm:px-6 pt-4 main-content-pad">
+    <!-- 範圍提示橫幅 -->
+    <div class="liquid-glass rounded-2xl px-3.5 py-2.5 mb-4 flex items-center justify-between gap-2 text-xs text-slate-300">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-shield-halved text-emerald-400 text-sm shrink-0"></i>
+        <span>考評局範圍聚焦：本題庫涵蓋<strong class="text-white">第1至3章</strong>，已完全排除第4章外蒙及西藏問題。</span>
+      </div>
+      <span id="filterSummaryBadge" class="shrink-0 px-2.5 py-1 rounded-full bg-white/10 text-cyan-200 font-semibold">共 90 題</span>
+    </div>
+
+    <!-- 題目列表容器 -->
+    <div id="questionsContainer" class="space-y-4"></div>
+
+    <!-- 空狀態提示（例如只看錯題但無錯題時） -->
+    <div id="emptyState" class="hidden liquid-glass rounded-3xl p-8 text-center my-6">
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300 text-2xl mb-3">
+        <i class="fa-solid fa-award"></i>
+      </div>
+      <h3 class="text-lg font-bold text-white mb-1">目前篩選條件下沒有題目</h3>
+      <p class="text-sm text-slate-300 mb-4">太棒了！你目前沒有未處理的錯題，或可切換其他章節繼續溫習。</p>
+      <button id="btnClearFilters" type="button" class="min-h-[48px] px-6 rounded-2xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-sm shadow-lg active:scale-95 transition">
+        顯示全部題目
+      </button>
+    </div>
+  </main>
+
+  <!-- 拇指友善底部懸浮導航列 (Sticky Bottom Action Bar) -->
+  <nav class="fixed bottom-0 inset-x-0 z-30 liquid-glass-strong bottom-bar-safe px-3 sm:px-6 pt-2.5 border-t border-white/15" aria-label="分頁與交卷導航">
+    <div class="max-w-5xl mx-auto flex items-center justify-between gap-2">
+      <!-- 上一頁 -->
+      <button id="btnPrevPage" type="button" class="liquid-pill min-h-[48px] px-4 sm:px-5 rounded-2xl flex items-center justify-center gap-1.5 text-sm font-bold text-white disabled:opacity-35 disabled:pointer-events-none">
+        <i class="fa-solid fa-chevron-left"></i>
+        <span>上一頁</span>
+      </button>
+
+      <!-- 中央頁碼指示器 / 測驗交卷按鈕 -->
+      <div class="flex-1 flex items-center justify-center gap-2">
+        <div id="pageIndicatorBox" class="liquid-glass min-h-[48px] px-3.5 rounded-2xl flex items-center justify-center gap-2 text-xs sm:text-sm font-bold text-slate-200">
+          <span class="text-cyan-300" id="currentPageText">第 1 頁</span>
+          <span class="text-slate-500">/</span>
+          <span id="totalPagesText">共 9 頁</span>
+        </div>
+
+        <!-- 模擬測驗模式專屬：交卷批改大按鈕 -->
+        <button id="btnSubmitExam" type="button" class="hidden min-h-[48px] px-4 sm:px-6 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 text-white font-extrabold text-sm shadow-lg shadow-emerald-500/30 active:scale-95 transition flex items-center gap-1.5">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>交卷批改</span>
+        </button>
+      </div>
+
+      <!-- 下一頁 -->
+      <button id="btnNextPage" type="button" class="liquid-pill min-h-[48px] px-4 sm:px-5 rounded-2xl flex items-center justify-center gap-1.5 text-sm font-bold text-white disabled:opacity-35 disabled:pointer-events-none">
+        <span>下一頁</span>
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- 底部抽屜彈窗 1：重點時間軸速覽（首三章） -->
+  <div id="timelineModal" class="sheet-backdrop fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-end md:items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="timelineTitle">
+    <div class="bottom-sheet w-full md:max-w-2xl max-h-[85vh] liquid-glass-strong rounded-t-3xl md:rounded-3xl flex flex-col overflow-hidden">
+      <!-- 手機頂部拖曳指示條 -->
+      <div class="w-12 h-1.5 bg-white/25 rounded-full mx-auto mt-3 mb-1 md:hidden"></div>
+
+      <div class="px-5 py-3.5 border-b border-white/15 flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center text-cyan-300">
+            <i class="fa-solid fa-clock-rotate-left"></i>
+          </div>
+          <div>
+            <h2 id="timelineTitle" class="text-base sm:text-lg font-extrabold text-white">HKDSE 首三章重點時間軸</h2>
+            <p class="text-xs text-slate-400">1912–1928 核心史實速覽（不含外蒙及西藏）</p>
+          </div>
+        </div>
+        <button id="btnCloseTimeline" type="button" class="w-11 h-11 rounded-2xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white text-lg active:scale-95" aria-label="關閉時間軸">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="p-5 overflow-y-auto space-y-5 text-sm">
+        <!-- 第1章 -->
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-indigo-500/25 border border-indigo-400/40 text-indigo-200 font-bold text-xs mb-2.5">
+            <i class="fa-solid fa-crown"></i> 第一章：袁世凱掌權時的政局（1912–1916）
+          </div>
+          <div class="border-l-2 border-indigo-400/40 ml-2 pl-4 space-y-2.5 text-slate-200">
+            <div><span class="text-cyan-300 font-bold">1912.02–03：</span>宣統帝退位；孫中山讓位；《中華民國臨時約法》頒布（改行責任內閣制以限制袁權）；袁世凱在北京就任臨時大總統。</div>
+            <div><span class="text-cyan-300 font-bold">1913.03–04：</span>宋教仁在上海火車站遇刺（暗殺案）；袁世凱未經國會同意簽訂《善後大借款》。</div>
+            <div><span class="text-cyan-300 font-bold">1913.07–11：</span>孫中山發動「二次革命」失敗；袁當選正式大總統後解散國民黨、取消國會。</div>
+            <div><span class="text-cyan-300 font-bold">1914.05：</span>廢除《臨時約法》，頒布《中華民國約法》（改行總統制，大總統權力無限擴大）。</div>
+            <div><span class="text-cyan-300 font-bold">1915.05–12：</span>接受日本《二十一條》大部要求；籌安會鼓吹帝制，袁改國號為「中華帝國」，定1916年為「洪憲元年」。</div>
+            <div><span class="text-cyan-300 font-bold">1915.12–1916.06：</span>蔡鍔、唐繼堯在雲南發動「護國之役」；1916年3月袁取消帝制，6月憂憤病逝。</div>
+          </div>
+        </div>
+
+        <!-- 第2章 -->
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/25 border border-purple-400/40 text-purple-200 font-bold text-xs mb-2.5">
+            <i class="fa-solid fa-chess-rook"></i> 第二章：北洋軍閥的統治（1916–1928）
+          </div>
+          <div class="border-l-2 border-purple-400/40 ml-2 pl-4 space-y-2.5 text-slate-200">
+            <div><span class="text-cyan-300 font-bold">1916.06：</span>袁世凱死後北洋派系分裂為直系（馮國璋、曹錕、吳佩孚）、皖系（段祺瑞）、奉系（張作霖）及地方軍閥。</div>
+            <div><span class="text-cyan-300 font-bold">1917.05–07：</span>總統黎元洪與總理段祺瑞因對德宣戰爆發「府院之爭」；張勳藉調停之機擁溥儀復辟（僅12日即被段祺瑞討平）。</div>
+            <div><span class="text-cyan-300 font-bold">1917.09：</span>段祺瑞拒不恢復《臨時約法》與國會，孫中山在廣州成立軍政府，發動「護法運動」。</div>
+            <div><span class="text-cyan-300 font-bold">1920–1924：</span>軍閥混戰加劇，先後爆發直皖戰爭（1920）、第一次直奉戰爭（1922）、第二次直奉戰爭（1924，期間馮玉祥發動北京政變）。</div>
+            <div><span class="text-cyan-300 font-bold">1926–1928：</span>國民革命軍北伐；1928年6月皇姑屯事件張作霖被炸死，12月張學良宣佈「東北易幟」，北洋軍閥時期結束。</div>
+          </div>
+        </div>
+
+        <!-- 第3章 -->
+        <div>
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/25 border border-emerald-400/40 text-emerald-200 font-bold text-xs mb-2.5">
+            <i class="fa-solid fa-bullhorn"></i> 第三章：山東問題與五四運動（1914–1919）
+          </div>
+          <div class="border-l-2 border-emerald-400/40 ml-2 pl-4 space-y-2.5 text-slate-200">
+            <div><span class="text-cyan-300 font-bold">1914.08–11：</span>一戰爆發，日本藉口英日同盟出兵山東，強佔膠州灣（青島）及膠濟鐵路。</div>
+            <div><span class="text-cyan-300 font-bold">1915.05：</span>日本迫使袁世凱簽訂《民四條約》（二十一條），要求繼承德國在山東的一切權益。</div>
+            <div><span class="text-cyan-300 font-bold">1918.09：</span>段祺瑞政府為向日本借款，對山東問題換文表示「欣然同意」，埋下外交隱患。</div>
+            <div><span class="text-cyan-300 font-bold">1919.01–04：</span>巴黎和會召開，中國代表顧維鈞等提出收回山東及廢除二十一條，遭列強拒絕，和約將德國在山東權益轉讓日本。</div>
+            <div><span class="text-cyan-300 font-bold">1919.05.04–06.28：</span>北京學生發動五四運動（「外爭主權，內除國賊」），火燒趙家樓；6月上海「三罷」工人階級登上舞台；政府罷免曹汝霖、章宗祥、陸宗輿並釋放學生，中國代表最終拒簽《凡爾賽和約》。</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部抽屜彈窗 2：模擬測驗成績單 -->
+  <div id="examResultModal" class="sheet-backdrop fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-end md:items-center justify-center" role="dialog" aria-modal="true" aria-labelledby="examResultTitle">
+    <div class="bottom-sheet w-full md:max-w-lg liquid-glass-strong rounded-t-3xl md:rounded-3xl p-5 sm:p-6 text-center">
+      <div class="w-12 h-1.5 bg-white/25 rounded-full mx-auto mb-4 md:hidden"></div>
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-emerald-400 to-cyan-500 flex items-center justify-center text-slate-950 text-3xl shadow-lg shadow-emerald-500/30 mb-3">
+        <i class="fa-solid fa-trophy"></i>
+      </div>
+      <h2 id="examResultTitle" class="text-xl font-black text-white">模擬測驗批改完成！</h2>
+      <p class="text-xs sm:text-sm text-slate-300 mt-1">以下為你本次作答的整體表現分析</p>
+
+      <div class="grid grid-cols-3 gap-2.5 my-5">
+        <div class="liquid-glass rounded-2xl p-3">
+          <div class="text-xs text-slate-400">總得分率</div>
+          <div id="resScorePct" class="text-2xl font-black text-cyan-300 mt-0.5">0%</div>
+        </div>
+        <div class="liquid-glass rounded-2xl p-3">
+          <div class="text-xs text-slate-400">答對題數</div>
+          <div id="resCorrectCount" class="text-2xl font-black text-emerald-400 mt-0.5">0 / 90</div>
+        </div>
+        <div class="liquid-glass rounded-2xl p-3">
+          <div class="text-xs text-slate-400">錯題 / 未答</div>
+          <div id="resWrongCount" class="text-2xl font-black text-rose-400 mt-0.5">0</div>
+        </div>
+      </div>
+
+      <div id="resComment" class="liquid-glass rounded-2xl p-3.5 text-xs sm:text-sm text-slate-200 mb-5 text-left leading-relaxed"></div>
+
+      <div class="grid grid-cols-2 gap-2.5">
+        <button id="btnReviewWrongFromModal" type="button" class="min-h-[50px] rounded-2xl bg-rose-500/25 border border-rose-400/45 text-rose-100 font-bold text-sm active:scale-95 transition">
+          <i class="fa-solid fa-magnifying-glass mr-1"></i>檢視錯題解析
+        </button>
+        <button id="btnCloseResultModal" type="button" class="min-h-[50px] rounded-2xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-sm shadow-lg active:scale-95 transition">
+          返回題目列表
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 輕量提示 Toast（取代 alert） -->
+  <div id="toastBox" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300">
+    <div class="liquid-glass-strong px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold text-white shadow-xl border border-cyan-400/40 flex items-center gap-2">
+      <i class="fa-solid fa-circle-info text-cyan-300"></i>
+      <span id="toastText">提示訊息</span>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * ============================================================================
+     * HKDSE 中五中國歷史科｜課題1：民初政局（首三章完整 90 題精選題庫）
+     * 結構：
+     * - 選擇題 (mc)：40 題（第1章 15題、第2章 13題、第3章 12題）
+     * - 填充題 (fill)：40 題（涵蓋同義詞／簡稱寬容批改）
+     * - 時序排列題 (sort)：10 組（每組 4 項史事）
+     * - 嚴格排除第4章外蒙及西藏問題
+     * ============================================================================
+     */
+    const QUESTION_BANK = [
+      // ==================== 第一章：袁世凱掌權時的政局（選擇題 1-15） ====================
+      {
+        id: 1, chapter: 1, type: 'mc',
+        question: '1912年3月，南京臨時參議院頒布《中華民國臨時約法》，改行「責任內閣制」的主要政治目的為何？',
+        options: [
+          '配合袁世凱建立強有力的中央集權政府',
+          '限制即將接任臨時大總統的袁世凱之權力',
+          '模仿美國總統制以加強行政效率',
+          '為清室皇族保留內閣總理大臣職位'
+        ],
+        answer: 1,
+        explanation: '孫中山及革命黨人為防範袁世凱獨裁，在《臨時約法》中刻意將原本《臨時政府組織大綱》的總統制改為「責任內閣制」，規定大總統頒布命令須經國務總理副署方能生效，藉此架空袁世凱。'
+      },
+      {
+        id: 2, chapter: 1, type: 'mc',
+        question: '1912年，袁世凱以「北京兵變」為藉口拒絕南下南京就職，其背後的真實考量是什麼？',
+        options: [
+          '南方爆發嚴重瘟疫，不適合建立首都',
+          '北洋軍閥勢力根基在華北，北京是其權力大本營',
+          '列強公使團強迫中華民國定都北京',
+          '孫中山主動建議定都北京以安撫滿清遺老'
+        ],
+        answer: 1,
+        explanation: '北京及華北是袁世凱小站練兵以來北洋軍閥的核心勢力範圍。若南下南京，袁將脫離北洋軍隊保護而受制於南方革命黨人，故策動兵變迫使臨時政府遷都北京。'
+      },
+      {
+        id: 3, chapter: 1, type: 'mc',
+        question: '1913年3月，國民黨代理理事長宋教仁在上海火車站遇刺身亡。宋教仁當時正準備北上做什麼？',
+        options: [
+          '向袁世凱遞交辭呈並解散國民黨',
+          '以國會第一大黨領袖身份組織責任內閣',
+          '前往日本與大隈重信談判山東問題',
+          '赴北京參加袁世凱的洪憲登基大典'
+        ],
+        answer: 1,
+        explanation: '1913年初國會選舉中，宋教仁改組的國民黨在參眾兩院大獲全勝，成為第一大黨。宋教仁正準備北上組織責任內閣以實現政黨政治，觸動袁世凱獨裁利益而遭暗殺。'
+      },
+      {
+        id: 4, chapter: 1, type: 'mc',
+        question: '1913年4月，袁世凱未經國會同意，私自與英、法、德、俄、日五國銀行團簽訂的巨額借款稱為：',
+        options: [
+          '西原借款',
+          '善後大借款',
+          '庚子賠款墊款',
+          '湖廣鐵路借款'
+        ],
+        answer: 1,
+        explanation: '袁世凱為籌措軍費鎮壓南方國民黨，違法繞過國會與五國銀行團簽訂《善後借款合同》（善後大借款），借款總額2,500萬英鎊，並以全國鹽稅作抵押。'
+      },
+      {
+        id: 5, chapter: 1, type: 'mc',
+        question: '引發1913年7月孫中山發動「二次革命」的直接導火線是哪兩件事？',
+        options: [
+          '袁世凱接受《二十一條》及成立籌安會',
+          '宋教仁遇刺案及袁世凱違法簽訂善後大借款',
+          '張勳擁立溥儀復辟及段祺瑞解散國會',
+          '巴黎和會外交失敗及火燒趙家樓事件'
+        ],
+        answer: 1,
+        explanation: '宋教仁案揭露袁世凱暗殺政敵的野心，隨後袁又非法簽訂善後大借款並罷免國民黨籍三省都督（李烈鈞、胡漢民、柏文蔚），孫中山遂號召發動「二次革命」。'
+      },
+      {
+        id: 6, chapter: 1, type: 'mc',
+        question: '「二次革命」在短短兩個月內迅速失敗的主要原因不包括下列哪一項？',
+        options: [
+          '革命黨人內部意見分歧，行動未能統一',
+          '列強透過善後大借款在財政與外交上支持袁世凱',
+          '民初社會渴望和平安定，民心厭戰，不支持再起兵戈',
+          '段祺瑞率領皖系軍隊從日本登陸包抄廣州'
+        ],
+        answer: 3,
+        explanation: '二次革命失敗主因在於革命黨內部步調不一、軍力遠遜北洋軍、列強支持袁世凱，以及民眾厭戰；當時尚無「皖系軍閥」之分（北洋分裂在1916年袁死後）。'
+      },
+      {
+        id: 7, chapter: 1, type: 'mc',
+        question: '1913年10月，袁世凱為迫使國會選舉自己為正式大總統，採取了什麼手段？',
+        options: [
+          '頒布《中華民國約法》直接取消選舉程序',
+          '唆使軍警及流氓組成「公民團」包圍國會，脅迫議員投票',
+          '邀請蔡鍔與梁啟超擔任監票人',
+          '宣布將總統任期縮短為兩年以換取支持'
+        ],
+        answer: 1,
+        explanation: '袁世凱指使部下組織所謂「公民團」數千人包圍國會，高喊「今日不選出我們中意的總統，休想出院」，強迫議員經過三輪投票選出袁為正式大總統。'
+      },
+      {
+        id: 8, chapter: 1, type: 'mc',
+        question: '1914年5月，袁世凱廢除《臨時約法》並頒布《中華民國約法》（又稱「袁記約法」），其核心制度改變為何？',
+        options: [
+          '由總統制改為君主立憲制',
+          '由責任內閣制改為總統制，賦予大總統無限權力',
+          '由中央集權制改為聯省自治制',
+          '設立參政院取代國務院總理'
+        ],
+        answer: 1,
+        explanation: '《中華民國約法》徹底廢除責任內閣制，改行總統制，規定大總統為國家元首並總攬統治權，可任意解散立法院、任命官員及宣戰媾和，為帝制鋪路。'
+      },
+      {
+        id: 9, chapter: 1, type: 'mc',
+        question: '1914年底袁世凱修改《大總統選舉法》，規定大總統任期十年且可連選連任，甚至規定下任總統候選人如何產生？',
+        options: [
+          '由全國省議會聯席投票推舉',
+          '由現任大總統推薦三人並藏於「金匱石室」',
+          '由內閣總理與國會議長共同協商提名',
+          '由北洋各省督軍輪流擔任'
+        ],
+        answer: 1,
+        explanation: '修改後的《大總統選舉法》規定，總統繼任人由現任大總統推薦三人，書於嘉禾金簡，藏於「金匱石室」，形同終身總統兼世襲制。'
+      },
+      {
+        id: 10, chapter: 1, type: 'mc',
+        question: '1915年1月，日本趁歐洲列強忙於第一次世界大戰之機，向袁世凱政府提出《二十一條》的根本企圖是什麼？',
+        options: [
+          '協助中國鎮壓南方護國軍',
+          '獨佔中國利權，企圖把中國變成日本的保護國',
+          '迫使中國立即對德國宣戰並加入協約國',
+          '要求中國割讓東北三省予日本'
+        ],
+        answer: 1,
+        explanation: '日本乘歐戰爆發列強無暇東顧，向袁世凱提出共五號的《二十一條》，其中第五號更要求中國政府聘用日人為政治、財政、軍事顧問，妄圖全面控制中國。'
+      },
+      {
+        id: 11, chapter: 1, type: 'mc',
+        question: '1915年8月，楊度、孫毓筠等六人發起成立什麼組織，公開發表宣言鼓吹中國實行君主立憲？',
+        options: [
+          '保皇會',
+          '籌安會',
+          '安福俱樂部',
+          '同盟會'
+        ],
+        answer: 1,
+        explanation: '在袁世凱默許下，楊度等「洪憲六君子」成立「籌安會」，藉美國顧問古德諾《共和與君主論》之說，製造全國請願改行帝制的輿論。'
+      },
+      {
+        id: 12, chapter: 1, type: 'mc',
+        question: '1915年12月，誰在雲南宣布獨立並組織「護國軍」，率先發動反對袁世凱稱帝的「護國之役」？',
+        options: [
+          '黃興、宋教仁',
+          '蔡鍔、唐繼堯',
+          '段祺瑞、馮國璋',
+          '陳炯明、胡漢民'
+        ],
+        answer: 1,
+        explanation: '梁啟超發表《異哉所謂國體問題者》痛斥帝制後，其學生蔡鍔潛離北京赴雲南，與雲南都督唐繼堯於1915年12月25日通電宣布雲南獨立，發起護國運動。'
+      },
+      {
+        id: 13, chapter: 1, type: 'mc',
+        question: '袁世凱「洪憲帝制」僅維持了83天便被迫取消，下列哪項不是帝制迅速敗亡的原因？',
+        options: [
+          '全國各省紛紛響應護國軍宣布獨立，眾叛親離',
+          '北洋嫡系將領段祺瑞、馮國璋消極抵制，不願為袁賣命',
+          '日本與西方列強轉而警告袁世凱暫緩稱帝',
+          '美國直接派遣遠征軍登陸天津推翻袁世凱'
+        ],
+        answer: 3,
+        explanation: '帝制失敗主因是國內護國軍興起、各省獨立、北洋大將（段、馮）反對及列強外交警告，外國並未直接出兵登陸推翻袁世凱。'
+      },
+      {
+        id: 14, chapter: 1, type: 'mc',
+        question: '下列關於袁世凱統治時期（1912–1916）對中國政局影響的敘述，哪一項最為準確？',
+        options: [
+          '成功建立了穩固的議會民主與多黨輪替制度',
+          '摧毀了民初共和法統，並為死後北洋軍閥割據混戰埋下禍根',
+          '徹底廢除了清末以來列強在華的一切不平等條約',
+          '使中國在第一次世界大戰中獲得戰勝國應有的全部領土主權'
+        ],
+        answer: 1,
+        explanation: '袁世凱先後暗殺政敵、解散國會、廢除《臨時約法》並復辟帝制，嚴重破壞共和制度；同時他長期培植私人武裝，死後無人能駕馭北洋諸將，直接導致軍閥割據混戰。'
+      },
+      {
+        id: 15, chapter: 1, type: 'mc',
+        question: '1915年5月，袁世凱政府最終接受日本《二十一條》第一至四號要求並簽約，史稱什麼？',
+        options: [
+          '《辛丑條約》',
+          '《民四條約》',
+          '《塘沽協定》',
+          '《善後大借款合同》'
+        ],
+        answer: 1,
+        explanation: '1915年（民國四年）5月7日日本發出最後通牒，袁世凱於5月9日（「五九國恥」）屈服，除第五號「容日後協商」外全盤接受，簽訂《中日民四條約》。'
+      },
+
+      // ==================== 第二章：北洋軍閥的統治（選擇題 16-28） ====================
+      {
+        id: 16, chapter: 2, type: 'mc',
+        question: '1916年6月袁世凱病逝後，北洋軍閥迅速分裂為三大主要派系。下列派系與首領的配對，哪一項是正確的？',
+        options: [
+          '直系——段祺瑞；皖系——馮國璋；奉系——張作霖',
+          '直系——馮國璋、曹錕、吳佩孚；皖系——段祺瑞；奉系——張作霖',
+          '直系——張作霖；皖系——吳佩孚；奉系——段祺瑞',
+          '直系——閻錫山；皖系——唐繼堯；奉系——馮玉祥'
+        ],
+        answer: 1,
+        explanation: '北洋三大派系為：直系（首領馮國璋，後為曹錕、吳佩孚，受英美支持）、皖系（首領段祺瑞，受日本支持）、奉系（首領張作霖，盤踞東北，受日本支持）。'
+      },
+      {
+        id: 17, chapter: 2, type: 'mc',
+        question: '1917年，大總統黎元洪與國務總理段祺瑞之間爆發激烈的「府院之爭」，兩人爭執的直接焦點事件是什麼？',
+        options: [
+          '是否接受《二十一條》',
+          '中國應否在第一次世界大戰中對德國宣戰',
+          '是否遷都南京',
+          '應否承認張勳復辟清室'
+        ],
+        answer: 1,
+        explanation: '一戰期間，段祺瑞（「院」，國務院）主張對德宣戰以趁機向日本借款擴充皖系軍力；黎元洪（「府」，總統府）在國會及英美支持下反對參戰，引發「府院之爭」。'
+      },
+      {
+        id: 18, chapter: 2, type: 'mc',
+        question: '1917年7月，安徽督軍張勳率領「辮子軍」北上北京，趁府院之爭混亂之際發動了什麼事件？',
+        options: [
+          '擁立廢帝溥儀復辟帝制',
+          '發動北京政變軟禁曹錕',
+          '成立安福國會選舉徐世昌',
+          '發起第二次護法運動'
+        ],
+        answer: 0,
+        explanation: '張勳打著「調停府院之爭」旗號率兵入京，於1917年7月1日擁立清廢帝溥儀復辟。段祺瑞隨即在馬廠誓師組成「討逆軍」，僅12天便擊敗張勳，再掌北京政權。'
+      },
+      {
+        id: 19, chapter: 2, type: 'mc',
+        question: '張勳復辟失敗後，重新掌權的段祺瑞拒絕恢復《臨時約法》與舊國會，孫中山遂在廣州發動了哪一場運動？',
+        options: [
+          '二次革命',
+          '護國運動',
+          '護法運動',
+          '國民革命軍北伐'
+        ],
+        answer: 2,
+        explanation: '段祺瑞聲稱「共和再造」，拒絕恢復民元《臨時約法》與國會。孫中山於1917年9月在廣州召集非常國會，成立護法軍政府，發動「護法運動」以維護約法尊嚴。'
+      },
+      {
+        id: 20, chapter: 2, type: 'mc',
+        question: '孫中山發動的「護法運動」最終未能成功，其最根本的內部原因為何？',
+        options: [
+          '廣州民眾強烈支持段祺瑞政府',
+          '西南軍閥（如陸榮廷、唐繼堯）借「護法」之名擴張地盤，排擠孫中山',
+          '德國派兵協助段祺瑞封鎖廣州港口',
+          '孫中山主動宣布放棄《臨時約法》'
+        ],
+        answer: 1,
+        explanation: '護法軍政府實權落入桂系陸榮廷、滇系唐繼堯等西南軍閥手中，他們與北洋軍閥一樣只顧割據地盤，改組軍政府排擠孫中山，使孫中山痛感「南與北如一丘之貉」。'
+      },
+      {
+        id: 21, chapter: 2, type: 'mc',
+        question: '皖系首領段祺瑞在1917至1918年間，以出賣國家鐵路、礦產與森林等主權為代價，向日本大舉借貸的巨款稱為：',
+        options: [
+          '善後大借款',
+          '西原借款',
+          '庚子借款',
+          '中東鐵路借款'
+        ],
+        answer: 1,
+        explanation: '段祺瑞透過日本寺內正毅內閣密使西原龜三，先後向日本借款八次（總額約1.45億日圓），史稱「西原借款」，用以編練「參戰軍」進行內戰。'
+      },
+      {
+        id: 22, chapter: 2, type: 'mc',
+        question: '1920年爆發的「直皖戰爭」，最終結果如何？',
+        options: [
+          '皖系大勝，段祺瑞統一全中國',
+          '直系聯合奉系擊敗皖系，段祺瑞下台，北京政權落入直奉兩系手中',
+          '奉系單獨擊敗直系與皖系',
+          '南方護法軍趁機攻佔北京'
+        ],
+        answer: 1,
+        explanation: '直系（曹錕、吳佩孚）與奉系（張作霖）聯手在1920年7月擊敗段祺瑞的皖系軍隊，皖系從此一蹶不振，北京政府轉由直、奉兩系共同控制。'
+      },
+      {
+        id: 23, chapter: 2, type: 'mc',
+        question: '1923年，直系首領曹錕透過什麼不光彩手段當選中華民國大總統，遭全國輿論譏為「豬仔議員」與「賄選總統」？',
+        options: [
+          '武力威脅議員投降',
+          '以每票五千銀元的支票公開賄賂國會議員',
+          '偽造全國各省督軍聯名推舉電報',
+          '與日本簽訂密約換取承認'
+        ],
+        answer: 1,
+        explanation: '曹錕為登上大總統寶座，公開以每票5,000銀元收買國會議員投票，史稱「曹錕賄選」，令北洋政府名譽掃地。'
+      },
+      {
+        id: 24, chapter: 2, type: 'mc',
+        question: '1924年第二次直奉戰爭期間，直系將領馮玉祥突然倒戈班師回京，囚禁總統曹錕，史稱什麼事件？',
+        options: [
+          '馬廠誓師',
+          '北京政變（首都革命）',
+          '皇姑屯事件',
+          '九一八事變'
+        ],
+        answer: 1,
+        explanation: '1924年10月，直系第三軍總司令馮玉祥在熱河前線倒戈回師北京，發動「北京政變」（又稱首都革命），囚禁曹錕，將軍隊改稱「國民軍」，並電邀孫中山北上共商國是。'
+      },
+      {
+        id: 25, chapter: 2, type: 'mc',
+        question: '北洋軍閥混戰時期，地方勢力為抵制中央軍閥武力統一，曾提出哪一種政治主張，實質上卻成為軍閥割據的護身符？',
+        options: [
+          '三民主義',
+          '聯省自治',
+          '君主立憲',
+          '全盤西化'
+        ],
+        answer: 1,
+        explanation: '1920年代初，湖南、廣東、浙江等省軍閥提出「聯省自治」，主張各省自定省憲、自治自決，表面提倡地方分權，實質是維持軍閥各自割據的局面。'
+      },
+      {
+        id: 26, chapter: 2, type: 'mc',
+        question: '下列哪一項不是北洋軍閥割據混戰（1916–1928）對中國社會造成的嚴重禍害？',
+        options: [
+          '軍費開支龐大，苛捐雜稅繁重，預徵田賦達數十年之久',
+          '兵禍連年導致農村破產、民生凋敝，流民與土匪橫行',
+          '各派軍閥勾結不同帝國主義列強，國家主權進一步喪失',
+          '全國工業因軍閥大力投資重工業而實現全面現代化'
+        ],
+        answer: 3,
+        explanation: '軍閥混戰耗盡國家財力，苛捐雜稅（如預徵田賦）壓垮農民，工商業受戰火破壞，且軍閥各自依附英、美、日等列強以獲取軍火與貸款，國家陷入極度黑暗。'
+      },
+      {
+        id: 27, chapter: 2, type: 'mc',
+        question: '1928年6月，奉系軍閥首領張作霖在乘火車退回瀋陽途中被日本關東軍炸死，史稱什麼事件？',
+        options: [
+          '濟南慘案',
+          '皇姑屯事件',
+          '西安事變',
+          '盧溝橋事變'
+        ],
+        answer: 1,
+        explanation: '1928年國民革命軍北伐逼近京津，張作霖退回東北，日本關東軍因不滿張作霖未完全順從日本要求，於6月4日在瀋陽皇姑屯車站預埋炸藥將其炸死。'
+      },
+      {
+        id: 28, chapter: 2, type: 'mc',
+        question: '標誌著北洋軍閥統治時期（1912–1928）正式結束、國民政府在形式上統一全國的事件是什麼？',
+        options: [
+          '1927年南京國民政府成立',
+          '1928年12月張學良宣佈「東北易幟」',
+          '1924年國民黨第一次全國代表大會召開',
+          '1926年國民革命軍攻克武昌'
+        ],
+        answer: 1,
+        explanation: '張作霖死後，其子張學良不顧日本威脅利誘，於1928年12月29日通電宣佈東北三省改懸青天白日滿地紅旗，服從南京國民政府，史稱「東北易幟」，北洋軍閥時期至此結束。'
+      },
+
+      // ==================== 第三章：山東問題與五四運動（選擇題 29-40） ====================
+      {
+        id: 29, chapter: 3, type: 'mc',
+        question: '近代中日之間「山東問題」的直接起源是什麼？',
+        options: [
+          '1895年《馬關條約》將山東半島割讓予日本',
+          '1914年一戰爆發後，日本藉口對德宣戰出兵強佔德國在山東的膠州灣及膠濟鐵路',
+          '1900年八國聯軍侵華後日本長期駐軍濟南',
+          '1928年北伐軍攻打濟南引發中日衝突'
+        ],
+        answer: 1,
+        explanation: '1898年德國強租膠州灣並修築膠濟鐵路。1914年一戰爆發，日本藉口英日同盟對德宣戰，違背中立國規定在山東龍口登陸，強佔青島及膠濟鐵路全線，形成「山東問題」。'
+      },
+      {
+        id: 30, chapter: 3, type: 'mc',
+        question: '1918年9月，段祺瑞北京政府為向日本換取借款，在關於山東問題的換文中寫下了哪四個字，成為巴黎和會上日本要挾中國的把柄？',
+        options: [
+          '「完全放棄」',
+          '「欣然同意」',
+          '「永久割讓」',
+          '「共同開發」'
+        ],
+        answer: 1,
+        explanation: '駐日公使章宗祥奉段祺瑞政府之命，在與日本政府交換《關於山東問題換文》時覆照表示「中國政府對於日本政府右列之提議，欣然同意」，極大削弱了中國在巴黎和會的談判立場。'
+      },
+      {
+        id: 31, chapter: 3, type: 'mc',
+        question: '1919年巴黎和會上，中國代表團（包括顧維鈞、王正廷等）提出的主要正義訴求是什麼？',
+        options: [
+          '要求日本賠償中國八國聯軍戰爭損失',
+          '要求直接收回德國在山東的一切權益，並廢除《二十一條》',
+          '要求加入國際聯盟常任理事國',
+          '要求美國派兵駐守青島及威海衛'
+        ],
+        answer: 1,
+        explanation: '中國在巴黎和會提出取消列強在華特權、廢除《民四條約》（二十一條），以及由德國直接歸還山東膠州灣租借地與鐵路權益予中國。'
+      },
+      {
+        id: 32, chapter: 3, type: 'mc',
+        question: '巴黎和會最終將德國在山東的權益轉讓給日本，背後的關鍵外交原因為何？',
+        options: [
+          '中國在一戰期間未曾派遣任何勞工支援協約國',
+          '英、法、意等國早已在一戰期間與日本簽訂密約，承諾戰後支持日本繼承德國在山東權益',
+          '美國總統威爾遜強烈反對民族自決原則',
+          '德國代表主動要求將青島交給日本託管'
+        ],
+        answer: 1,
+        explanation: '1917年初，日本趁協約國戰事吃緊，先後與英、法、俄、意簽訂密約，換取各國在戰後和會支持日本繼承德國在山東的權益；加之北洋政府曾簽《民四條約》及「欣然同意」換文，導致和會偏袒日本。'
+      },
+      {
+        id: 33, chapter: 3, type: 'mc',
+        question: '1919年5月4日，北京三千多名大專學生齊集天安門遊行示威，高呼「外爭主權，內除國賊」等口號，當時學生點名要求懲辦的三名親日賣國官員是誰？',
+        options: [
+          '袁世凱、楊度、段祺瑞',
+          '曹汝霖、章宗祥、陸宗輿',
+          '曹錕、吳佩孚、張作霖',
+          '顧維鈞、陸徵祥、王正廷'
+        ],
+        answer: 1,
+        explanation: '學生痛恨經手簽訂《民四條約》及「西原借款」、「欣然同意」換文的三名親日官僚：交通總長曹汝霖、駐日公使章宗祥、幣制局總裁陸宗輿，遂遊行至趙家樓曹汝霖住宅痛打章宗祥並火燒趙家樓。'
+      },
+      {
+        id: 34, chapter: 3, type: 'mc',
+        question: '1919年6月初，五四運動的重心由北京轉移至上海，運動形式出現了什麼重大轉變，迫使北洋政府最終屈服？',
+        options: [
+          '學生發動武裝起義攻佔上海江南製造局',
+          '上海工人罷工、商人罷市、學生罷課（「三罷」鬥爭），工人階級首次登上政治舞台',
+          '上海租界工部局宣布支持北京學生',
+          '孫中山在上海宣布成立新的中央政府'
+        ],
+        answer: 1,
+        explanation: '6月3日北洋政府在北京大肆逮捕學生後，上海工人於6月5日起率先發動大規模政治罷工，商人罷市、學生罷課響應（即「三罷」），全國各大城市紛起效尤，形成全民愛國浪潮。'
+      },
+      {
+        id: 35, chapter: 3, type: 'mc',
+        question: '在全國「三罷」壓力下，五四愛國運動取得了哪三項直接的勝利成果？',
+        options: [
+          '段祺瑞下台、國會重開、日本立即歸還青島',
+          '釋放被捕學生、罷免曹章陸三人職務、中國代表拒簽《凡爾賽和約》',
+          '廢除一切不平等條約、取消領事裁判權、收回關稅自主',
+          '北洋軍閥宣布解散、全國實現和平統一、頒布新憲法'
+        ],
+        answer: 1,
+        explanation: '6月10日北京政府被迫罷免曹汝霖、章宗祥、陸宗輿三人並釋放被捕學生；6月28日《凡爾賽和約》簽字當天，在留法學生與華工包圍施壓下，中國代表團拒絕出席簽字儀式。'
+      },
+      {
+        id: 36, chapter: 3, type: 'mc',
+        question: '山東問題最終在何時、透過哪一場國際會議才得以初步解決，日本同意將膠州灣租借地交還中國？',
+        options: [
+          '1919年巴黎和會',
+          '1921–1922年華盛頓會議（簽訂《解決山東懸案條約》）',
+          '1925年五卅運動後',
+          '1928年東北易幟後'
+        ],
+        answer: 1,
+        explanation: '中國在巴黎和會拒簽和約保留了山東問題的懸案地位。1921–1922年美國召開華盛頓會議，在英美斡旋及中國代表堅持下，中日簽訂《解決山東懸案條約》，日本同意交還膠州灣並撤軍。'
+      },
+      {
+        id: 37, chapter: 3, type: 'mc',
+        question: '五四運動在中國近代思想文化與政治發展史上具有分水嶺意義，下列哪項描述最符合其歷史影響？',
+        options: [
+          '標誌著中國舊民主主義革命結束與新民主主義革命開端，促進馬克思主義傳播與中共成立',
+          '徹底消滅了中國封建地主階級與帝國主義勢力',
+          '使儒家傳統文化重新成為全國唯一的官方意識形態',
+          '促使北洋政府立即實行社會主義制度'
+        ],
+        answer: 0,
+        explanation: '五四運動中工人階級作為獨立政治力量登上歷史舞台，標誌著新民主主義革命的開端；同時推動新文化運動深入發展，促進馬克思主義在中國廣泛傳播，為1921年中國共產黨成立奠定思想與幹部基礎。'
+      },
+      {
+        id: 38, chapter: 3, type: 'mc',
+        question: '五四運動與新文化運動（1915年陳獨秀創辦《青年雜誌》起）之間存在著怎樣的互動關係？',
+        options: [
+          '五四運動完全否定了新文化運動提倡的民主與科學',
+          '新文化運動為五四運動作了思想啟蒙與動員，五四運動則推動新文化運動向更廣泛社會階層普及',
+          '兩者毫無關聯，分別發生在不同年代',
+          '新文化運動是在五四運動失敗後才由胡適發起的'
+        ],
+        answer: 1,
+        explanation: '新文化運動高舉「民主」（德先生）與「科學」（賽先生）大旗，解放青年思想，為五四愛國運動準備了思想條件；而五四運動爆發後，白話文報刊如雨後春筍湧現，使新思潮傳遍全國。'
+      },
+      {
+        id: 39, chapter: 3, type: 'mc',
+        question: '1919年5月4日火燒趙家樓事件中，遭憤怒學生痛打至重傷的親日官員是哪一位？',
+        options: [
+          '曹汝霖',
+          '章宗祥',
+          '陸宗輿',
+          '段祺瑞'
+        ],
+        answer: 1,
+        explanation: '學生衝入北京東城趙家樓胡同曹汝霖住宅時，曹汝霖倉皇翻牆逃走，學生在屋內發現剛回國的駐日公使章宗祥，遂痛打章宗祥並放火焚燒趙家樓。'
+      },
+      {
+        id: 40, chapter: 3, type: 'mc',
+        question: '1919年6月28日《凡爾賽和約》簽字當天，中國代表團沒有出席簽字儀式，這在中國近代外交史上具有什麼重要意義？',
+        options: [
+          '中國自此與英法美等協約國斷絕一切外交關係',
+          '打破了近代以來中國政府在列強壓力下屈辱簽約的慣例，維護了國家主權尊嚴',
+          '迫使日本立即在1919年7月撤出山東全境',
+          '使中國立即成為國際聯盟的創始會員國'
+        ],
+        answer: 1,
+        explanation: '中國代表團拒簽《凡爾賽和約》，是中國近代史上首次在重大國際會議上對損害國家主權的不公條約說「不」，展現了全民覺醒的強大力量，並為日後華盛頓會議收回山東保留了法理依據。'
+      },
+
+      // ==================== 第一章至第三章：填充題（41-80，共40題） ====================
+      {
+        id: 41, chapter: 1, type: 'fill',
+        question: '1912年3月，南京臨時參議院頒布《______》，規定改行責任內閣制，以限制袁世凱的權力。',
+        answers: ['中華民國臨時約法', '臨時約法'],
+        explanation: '《中華民國臨時約法》是中國歷史上第一部具有資產階級共和國憲法性質的文獻，旨在以內閣制牽制袁世凱。'
+      },
+      {
+        id: 42, chapter: 1, type: 'fill',
+        question: '1912年2月，清帝______（填名或年號）頒布退位詔書，結束了中國兩千多年的君主專制制度。',
+        answers: ['溥儀', '宣統', '宣統帝', '愛新覺羅溥儀'],
+        explanation: '1912年2月12日，隆裕太后代年幼的宣統帝（溥儀）頒布《退位詔書》，清朝統治正式結束。'
+      },
+      {
+        id: 43, chapter: 1, type: 'fill',
+        question: '1912年，袁世凱為避免南下受制於革命黨人，暗中策動「______」，藉口北方秩序不穩要求定都北京。',
+        answers: ['北京兵變'],
+        explanation: '袁世凱指使曹錕率領北洋軍第三鎮在北京製造兵變，迫使南京參議院同意袁在北京就職。'
+      },
+      {
+        id: 44, chapter: 1, type: 'fill',
+        question: '1913年3月，國民黨代理理事長______在上海火車站遇刺身亡，引發全國震驚，成為二次革命的導火線之一。',
+        answers: ['宋教仁'],
+        explanation: '宋教仁主張政黨內閣制，國民黨在國會選舉大勝後，袁世凱主使暗殺宋教仁於上海滬寧車站。'
+      },
+      {
+        id: 45, chapter: 1, type: 'fill',
+        question: '1913年4月，袁世凱未經國會同意，私自與五國銀行團簽訂總額2,500萬英鎊的《______》，以充實鎮壓南方的軍費。',
+        answers: ['善後大借款', '善後借款合同', '善後借款'],
+        explanation: '善後大借款以全國鹽稅作抵押，並由外人監督財政，是袁世凱違法籌措內戰經費的鐵證。'
+      },
+      {
+        id: 46, chapter: 1, type: 'fill',
+        question: '1913年7月，孫中山因宋教仁被刺及善後大借款事件，號召南方各省興師討袁，史稱「______」。',
+        answers: ['二次革命', '贛寧之役'],
+        explanation: '江西都督李烈鈞首先在湖口宣布獨立，黃興在南京響應，但因力量懸殊，僅兩個月即告失敗。'
+      },
+      {
+        id: 47, chapter: 1, type: 'fill',
+        question: '1913年10月，袁世凱指使軍警流氓組成「______」包圍國會，脅迫議員選舉其為正式大總統。',
+        answers: ['公民團'],
+        explanation: '袁世凱利用「公民團」包圍議場達十餘小時，議員飢寒交迫下被迫三輪投票選出袁世凱。'
+      },
+      {
+        id: 48, chapter: 1, type: 'fill',
+        question: '1914年5月，袁世凱廢除《臨時約法》，頒布《______》，將責任內閣制改為大總統總攬大權的總統制。',
+        answers: ['中華民國約法', '袁記約法'],
+        explanation: '《中華民國約法》取消國務院總理，改設政事堂國務卿，使大總統形同專制君主。'
+      },
+      {
+        id: 49, chapter: 1, type: 'fill',
+        question: '1915年1月，日本趁歐戰爆發列強無暇東顧，向袁世凱政府提出旨在滅亡中國的《______》。',
+        answers: ['二十一條', '民四條約'],
+        explanation: '日本公使日置益直接向袁世凱遞交《二十一條》，企圖全面控制中國政治、軍事、財政與領土。'
+      },
+      {
+        id: 50, chapter: 1, type: 'fill',
+        question: '1915年8月，楊度等六人成立「______」，公開鼓吹君主立憲，為袁世凱稱帝製造輿論。',
+        answers: ['籌安會'],
+        explanation: '楊度、孫毓筠、嚴復、劉師培、李燮和、胡瑛六人發起籌安會，被時人譏為「洪憲六君子」。'
+      },
+      {
+        id: 51, chapter: 1, type: 'fill',
+        question: '袁世凱稱帝前夕，延聘美國政治顧問______撰寫《共和與君主論》，聲稱中國民智未開只宜行君主制。',
+        answers: ['古德諾'],
+        explanation: '古德諾的文章被籌安會大肆渲染，成為袁世凱推翻共和、恢復帝制的「理論依據」。'
+      },
+      {
+        id: 52, chapter: 1, type: 'fill',
+        question: '1915年底，袁世凱接受推戴，改中華民國國號為「中華帝國」，並定1916年為「______」元年。',
+        answers: ['洪憲'],
+        explanation: '袁世凱於1915年12月12日宣布接受帝位，改元「洪憲」，但僅83天便在全國反對下被迫取消。'
+      },
+      {
+        id: 53, chapter: 1, type: 'fill',
+        question: '1915年12月25日，______與唐繼堯在雲南通電宣布獨立，組織護國軍北上討袁，史稱「護國之役」。',
+        answers: ['蔡鍔'],
+        explanation: '蔡鍔在老師梁啟超支持下潛離北京赴滇，率護國軍第一軍入川作戰，重創北洋軍。'
+      },
+      {
+        id: 54, chapter: 1, type: 'fill',
+        question: '洪憲帝制籌備期間，______發表著名政論文《異哉所謂國體問題者》，嚴詞駁斥帝制復辟謬論。',
+        answers: ['梁啟超'],
+        explanation: '梁啟超拒絕袁世凱重金收買，發表《異哉所謂國體問題者》，在思想輿論界給洪憲帝制致命一擊。'
+      },
+      {
+        id: 55, chapter: 2, type: 'fill',
+        question: '1916年袁世凱死後，北洋軍閥分裂為直、皖、奉三系，其中皖系軍閥的首領是______。',
+        answers: ['段祺瑞'],
+        explanation: '段祺瑞長期掌控北洋陸軍部與國務院，背後有日本帝國主義支持，為皖系首領。'
+      },
+      {
+        id: 56, chapter: 2, type: 'fill',
+        question: '北洋三大派系中，盤踞東北三省、並獲日本支持的奉系軍閥首領是______。',
+        answers: ['張作霖'],
+        explanation: '張作霖出身綠林，後任奉天督軍及東三省巡閱使，成為奉系軍閥首領。'
+      },
+      {
+        id: 57, chapter: 2, type: 'fill',
+        question: '北洋三大派系中，受英美支持、先後以馮國璋、曹錕、______為核心首領的派系稱為「直系」。',
+        answers: ['吳佩孚'],
+        explanation: '馮國璋1919年病逝後，直系由曹錕與善戰的「秀才軍閥」吳佩孚領導。'
+      },
+      {
+        id: 58, chapter: 2, type: 'fill',
+        question: '1917年，大總統黎元洪與國務總理段祺瑞因對德宣戰問題爆發激烈衝突，史稱「______」。',
+        answers: ['府院之爭'],
+        explanation: '「府」指總統府（黎元洪），「院」指國務院（段祺瑞），背後實為美日兩國在華爭奪控制權的反映。'
+      },
+      {
+        id: 59, chapter: 2, type: 'fill',
+        question: '1917年7月，安徽督軍______率領「辮子軍」入京，趁政局混亂擁立清廢帝溥儀復辟，僅12天即告失敗。',
+        answers: ['張勳'],
+        explanation: '張勳復辟鬧劇迅速被段祺瑞的「討逆軍」平定，此後再無人敢公開復辟清室。'
+      },
+      {
+        id: 60, chapter: 2, type: 'fill',
+        question: '1917年9月，針對段祺瑞拒絕恢復《臨時約法》與國會，孫中山在廣州成立軍政府，發動「______」。',
+        answers: ['護法運動', '護法之役'],
+        explanation: '孫中山就任護法軍政府大元帥，號召維護《臨時約法》與國會尊嚴，但最終受制於西南軍閥而失敗。'
+      },
+      {
+        id: 61, chapter: 2, type: 'fill',
+        question: '1917至1918年間，段祺瑞政府以出賣國家鐵路、礦產等利權為抵押，向日本借取的八筆巨款統稱為「______」。',
+        answers: ['西原借款'],
+        explanation: '西原借款由日本首相寺內正毅親信西原龜三經手，使日本在華權益大增，段祺瑞則用來擴充皖系軍隊。'
+      },
+      {
+        id: 62, chapter: 2, type: 'fill',
+        question: '1923年，直系首領______以每票五千銀元公開收買國會議員而當選大總統，遭全國唾棄為「賄選總統」。',
+        answers: ['曹錕'],
+        explanation: '曹錕賄選不僅曝光了支票證據，更徹底暴露北洋代議政治的腐敗無恥。'
+      },
+      {
+        id: 63, chapter: 2, type: 'fill',
+        question: '1924年第二次直奉戰爭期間，直系將領______突然倒戈回師北京囚禁曹錕，史稱「北京政變」。',
+        answers: ['馮玉祥'],
+        explanation: '馮玉祥發動北京政變後，還將清廢帝溥儀驅逐出紫禁城，結束其「小朝廷」優待。'
+      },
+      {
+        id: 64, chapter: 2, type: 'fill',
+        question: '1924年底，孫中山應馮玉祥等人邀請北上共商國是，沿途發表宣言主張召開「______」及廢除不平等條約。',
+        answers: ['國民會議'],
+        explanation: '孫中山抱病北上，提出對內召開國民會議、對外廢除不平等條約，可惜於1925年3月12日在北京病逝。'
+      },
+      {
+        id: 65, chapter: 2, type: 'fill',
+        question: '1928年6月4日，張作霖乘專列退回東北時，在瀋陽郊外的______車站被日本關東軍預埋炸藥炸死。',
+        answers: ['皇姑屯'],
+        explanation: '皇姑屯事件是日本關東軍企圖製造東北混亂以便趁機侵佔的陰謀，卻反而促成張學良決心歸順南京。'
+      },
+      {
+        id: 66, chapter: 2, type: 'fill',
+        question: '1928年12月29日，張學良通電宣佈東北三省改懸青天白日滿地紅旗，服從南京國民政府，史稱「______」。',
+        answers: ['東北易幟'],
+        explanation: '東北易幟標誌著北洋軍閥統治正式結束，國民政府實現形式上的全國統一。'
+      },
+      {
+        id: 67, chapter: 3, type: 'fill',
+        question: '1914年一戰爆發後，日本藉口對德宣戰出兵山東，強佔了德國租借地______（青島）及膠濟鐵路。',
+        answers: ['膠州灣'],
+        explanation: '日本強佔膠州灣及膠濟鐵路並設軍政署，企圖取代德國長期霸佔山東。'
+      },
+      {
+        id: 68, chapter: 3, type: 'fill',
+        question: '1918年，段祺瑞政府駐日公使______在與日本交換山東問題照會時，竟表示「欣然同意」，釀成外交大禍。',
+        answers: ['章宗祥'],
+        explanation: '章宗祥簽署的「欣然同意」換文，成為1919年巴黎和會上日本堅持繼承山東權益的重要口實。'
+      },
+      {
+        id: 69, chapter: 3, type: 'fill',
+        question: '1919年巴黎和會上，中國代表______在會上慷慨陳詞，駁斥日本無理要求，主張山東是中國文化搖籃必須直接歸還。',
+        answers: ['顧維鈞'],
+        explanation: '顧維鈞在巴黎和會「十人會」上的精彩發言贏得國際同情，但仍不敵英法日秘密外交的強權政治。'
+      },
+      {
+        id: 70, chapter: 3, type: 'fill',
+        question: '1919年5月4日，北京三千多名學生齊集天安門遊行，高呼「______，內除國賊」的愛國口號。',
+        answers: ['外爭主權', '外爭國權'],
+        explanation: '「外爭主權，內除國賊」、「誓死力爭，還我青島」、「拒絕在和約上簽字」是五四運動最核心的口號。'
+      },
+      {
+        id: 71, chapter: 3, type: 'fill',
+        question: '五四遊行當天，憤怒的學生衝入北京東城______胡同的曹汝霖住宅，痛打章宗祥並放火焚屋。',
+        answers: ['趙家樓'],
+        explanation: '「火燒趙家樓」震撼全國，北洋軍警隨即逮捕三十二名學生，激起全國更大規模的抗議。'
+      },
+      {
+        id: 72, chapter: 3, type: 'fill',
+        question: '五四運動中，學生要求嚴懲的三名親日賣國官員分別是曹汝霖、章宗祥和______。',
+        answers: ['陸宗輿'],
+        explanation: '曹汝霖、章宗祥、陸宗輿三人均積極參與對日交涉《民四條約》及西原借款，被國人視為三大國賊。'
+      },
+      {
+        id: 73, chapter: 3, type: 'fill',
+        question: '1919年6月5日起，五四運動中心轉移至______，當地工人率先發動政治罷工，隨後商人罷市、學生罷課形成「三罷」。',
+        answers: ['上海'],
+        explanation: '上海是當時中國最大的工商業中心，上海工人階級的罷工給予北洋政府最沉重的經濟與政治打擊。'
+      },
+      {
+        id: 74, chapter: 3, type: 'fill',
+        question: '1919年6月28日，中國代表團在全國人民及留法學生華工的督促下，拒絕在對德《______》上簽字。',
+        answers: ['凡爾賽和約', '凡爾賽條約'],
+        explanation: '中國代表團拒簽《凡爾賽和約》，打破了中國近代外交史上屈辱簽約的慣例。'
+      },
+      {
+        id: 75, chapter: 3, type: 'fill',
+        question: '巴黎和會懸而未決的山東問題，直至1921–1922年美國召開______會議期間，中日簽訂條約後才得以初步解決。',
+        answers: ['華盛頓', '華盛頓會議'],
+        explanation: '1922年2月中日簽訂《解決山東懸案條約》，日本同意將膠州灣租借地交還中國並撤走駐軍。'
+      },
+      {
+        id: 76, chapter: 3, type: 'fill',
+        question: '五四運動爆發前，陳獨秀等人於1915年發起新文化運動，高舉「民主」與「______」（賽先生）兩大旗幟。',
+        answers: ['科學'],
+        explanation: '新文化運動提倡民主（德先生）與科學（賽先生），批判舊禮教，為五四運動作了充分的思想準備。'
+      },
+      {
+        id: 77, chapter: 3, type: 'fill',
+        question: '新文化運動期間，______發表《文學改良芻議》，大力提倡白話文，促使五四時期白話報刊蓬勃發展。',
+        answers: ['胡適'],
+        explanation: '胡適提倡白話文文學革命，使新思想與愛國宣傳得以在五四運動中迅速普及至廣大民眾。'
+      },
+      {
+        id: 78, chapter: 3, type: 'fill',
+        question: '五四運動標誌著中國舊民主主義革命的結束，以及______革命的開端。',
+        answers: ['新民主主義'],
+        explanation: '由於無產階級（工人階級）在五四運動中首次作為獨立政治力量登上歷史舞台，史學界視之為新民主主義革命開端。'
+      },
+      {
+        id: 79, chapter: 1, type: 'fill',
+        question: '1916年3月22日，袁世凱在眾叛親離下被迫宣布取消______帝制，並於同年6月6日在憂懼交加中病逝。',
+        answers: ['洪憲'],
+        explanation: '洪憲帝制僅存在83天便宣告破產，袁世凱身敗名裂而死。'
+      },
+      {
+        id: 80, chapter: 2, type: 'fill',
+        question: '1920年7月，直系與奉系聯手擊敗皖系段祺瑞的戰爭，史稱「______」。',
+        answers: ['直皖戰爭'],
+        explanation: '直皖戰爭是北洋軍閥分裂後爆發的第一場大規模派系混戰，皖系自此退出北京權力中心。'
+      },
+
+      // ==================== 時序排列題（81-90，共10組，每組4項） ====================
+      {
+        id: 81, chapter: 1, type: 'sort',
+        question: '請將下列「民國肇建與袁世凱掌權初期」的歷史事件，按發生時間由先至後排列：',
+        items: [
+          { id: 'a', text: '宣統帝溥儀頒布退位詔書（1912年2月）' },
+          { id: 'b', text: '南京臨時參議院頒布《中華民國臨時約法》（1912年3月）' },
+          { id: 'c', text: '宋教仁在上海火車站遇刺身亡（1913年3月）' },
+          { id: 'd', text: '孫中山發動「二次革命」討伐袁世凱（1913年7月）' }
+        ],
+        answerOrder: ['a', 'b', 'c', 'd'],
+        explanation: '正確時序：1912年2月清帝退位 → 1912年3月頒布《臨時約法》 → 1913年3月宋教仁被刺 → 1913年7月二次革命爆發。'
+      },
+      {
+        id: 82, chapter: 1, type: 'sort',
+        question: '請將下列「袁世凱獨裁與洪憲帝制」相關事件，按發生時間由先至後排列：',
+        items: [
+          { id: 'a', text: '袁世凱廢除《臨時約法》，頒布《中華民國約法》（1914年5月）' },
+          { id: 'b', text: '日本向袁世凱政府提出《二十一條》（1915年1月）' },
+          { id: 'c', text: '楊度等六人成立「籌安會」鼓吹帝制（1915年8月）' },
+          { id: 'd', text: '蔡鍔、唐繼堯在雲南發起「護國之役」（1915年12月）' }
+        ],
+        answerOrder: ['a', 'b', 'c', 'd'],
+        explanation: '正確時序：1914年5月《中華民國約法》 → 1915年1月《二十一條》 → 1915年8月籌安會成立 → 1915年12月雲南護國之役。'
+      },
+      {
+        id: 83, chapter: 1, type: 'sort',
+        question: '請將下列1913年間的重要政治事件，按發生時間由先至後排列：',
+        items: [
+          { id: 'a', text: '袁世凱未經國會同意簽訂《善後大借款》（1913年4月）' },
+          { id: 'b', text: '「二次革命」在南方各省爆發並迅速失敗（1913年7–9月）' },
+          { id: 'c', text: '「公民團」包圍國會迫選袁世凱為正式大總統（1913年10月）' },
+          { id: 'd', text: '袁世凱下令解散國民黨並取消國民黨籍議員資格（1913年11月）' }
+        ],
+        answerOrder: ['a', 'b', 'c', 'd'],
+        explanation: '正確時序：1913年4月善後大借款 → 7月二次革命 → 10月公民團脅迫選舉正式總統 → 11月解散國民黨。'
+      },
+      {
+        id: 84, chapter: 2, type: 'sort',
+        question: '請將下列「袁世凱死後至護法運動」的政局演變，按時間由先至後排列：',
+        items: [
+          { id: 'a', text: '袁世凱取消帝制後憂憤病逝，北洋軍閥開始分裂（1916年6月）' },
+          { id: 'b', text: '黎元洪與段祺瑞因對德宣戰爆發「府院之爭」（1917年5月）' },
+          { id: 'c', text: '張勳率「辮子軍」入京擁立溥儀復辟（1917年7月）' },
+          { id: 'd', text: '孫中山在廣州成立軍政府，發動「護法運動」（1917年9月）' }
+        ],
+        answerOrder: ['a', 'b', 'c', 'd'],
+        explanation: '正確時序：1916年6月袁世凱病逝 → 1917年5月府院之爭 → 1917年7月張勳復辟 → 1917年9月孫中山發動護法運動。'
+      },
+      {
+        id: 85, chapter: 2, type: 'sort',
+        question: '請將下列「北洋軍閥混戰與政權更迭」事件，按時間由先至後排列：',
+        items: [
+          { id: 'a', text: '直皖戰爭爆發，皖系段祺瑞戰敗下台（1920年7月）' },
+          { id: 'b', text: '第一次直奉戰爭爆發，奉系張作霖退回關外（1922年4月）' },
+          { id: 'c', text: '直系首領曹錕以重金收買議員成為「賄選總統」（1923年10月）' },
+          { id: 'd', text: '馮玉祥發動「北京政變」，囚禁曹錕並驅逐溥儀出宮（1924年10月）' }
+        ],
+        answerOrder: ['a', 'b', 'c', 'd'],
+        explanation: '正確時序：1920年直皖戰爭 → 1922年第一次直奉戰爭 → 1923年曹錕賄選 → 1924年北京政變。'
+      },
+      {
+        id: 86, chapter: 2, type: 'sort',
+        question: '請將下列「北洋軍閥統治終結」的關鍵事件，按時間由先至後排列：',
+        items: [
+          { id: 'a', text: '孫中山應邀北上共商國是，隨後病逝於北京（1925年3月）' },
+          { id: 'b', text: '廣州國民政府誓師北伐，推翻北洋軍閥統治（1926年7月）' },
+          { id: 'c', text: '日本關東軍製造「皇姑屯事件」炸死張作霖（1928年6月）' },
+          { id: 'd', text: '張學良宣佈「東北易幟」，北洋軍閥時期正式結束（1928年12月）' }
+        ],
+        answerOrder: ['a', 'b', 'c', 'd'],
+        explanation: '正確時序：1925年3月孫中山逝世 → 1926年7月國民革命軍北伐 → 1928年6月皇姑屯事件 → 1928年12月東北易幟。'
+      },
+      {
+        id: 87, chapter: 3, type: 'sort',
+        question: '請將下列「山東問題起源與外交交涉」事件，按時間由先至後排列：',
+        items: [
+          { id: 'a', text: '一戰爆發，日本出兵山東強佔膠州灣及膠濟鐵路（1914年11月）' },
+          { id: 'b', text: '袁世凱政府屈服於日本最後通牒，簽訂《民四條約》（1915年5月）' },
+          { id: 'c', text: '段祺瑞政府對日本關於山東問題換文覆以「欣然同意」（1918年9月）' },
+          { id: 'd', text: '巴黎和會決定將德國在山東權益轉讓予日本（1919年4月底）' }
+        ],
+        answerOrder: ['a', 'b', 'c', 'd'],
+        explanation: '正確時序：1914年日本強佔膠州灣 → 1915年5月簽訂《民四條約》 → 1918年9月「欣然同意」換文 → 1919年4月巴黎和會外交失敗。'
+      },
+      {
+        id: 88, chapter: 3, type: 'sort',
+        question: '請將下列「1919年五四愛國運動發展進程」事件，按時間由先至後排列：',
+        items: [
+          { id: 'a', text: '北京三千學生天安門集會遊行，痛打章宗祥並火燒趙家樓（5月4日）' },
+          { id: 'b', text: '上海工人發動政治罷工，隨後商人罷市、學生罷課形成「三罷」（6月5日起）' },
+          { id: 'c', text: '北洋政府被迫釋放被捕學生，並罷免曹汝霖、章宗祥、陸宗輿（6月10日）' },
+          { id: 'd', text: '中國代表團拒絕出席簽字儀式，拒簽《凡爾賽和約》（6月28日）' }
+        ],
+        answerOrder: ['a', 'b', 'c', 'd'],
+        explanation: '正確時序：1919年5月4日火燒趙家樓 → 6月5日上海「三罷」 → 6月10日罷免曹章陸 → 6月28日拒簽《凡爾賽和約》。'
+      },
+      {
+        id: 89, chapter: 3, type: 'sort',
+        question: '請將下列「新文化運動至山東問題解決」的重大事件，按時間由先至後排列：',
+        items: [
+          { id: 'a', text: '陳獨秀在上海創辦《青年雜誌》，揭開新文化運動序幕（1915年9月）' },
+          { id: 'b', text: '北京爆發「五四運動」，反對巴黎和會山東問題不公決議（1919年5月）' },
+          { id: 'c', text: '中國共產黨第一次全國代表大會在上海召開（1921年7月）' },
+          { id: 'd', text: '華盛頓會議期間中日簽訂《解決山東懸案條約》，日本交還膠州灣（1922年2月）' }
+        ],
+        answerOrder: ['a', 'b', 'c', 'd'],
+        explanation: '正確時序：1915年新文化運動開始 → 1919年五四運動 → 1921年中共一大召開 → 1922年華盛頓會議簽訂《解決山東懸案條約》。'
+      },
+      {
+        id: 90, chapter: 1, type: 'sort',
+        question: '綜合首三章核心大事：請將下列四個重大歷史轉折點按時間由先至後排列：',
+        items: [
+          { id: 'a', text: '袁世凱接受推戴改元「洪憲」，籌備恢復帝制（1915年12月）' },
+          { id: 'b', text: '孫中山在廣州成立護法軍政府，發起護法運動（1917年9月）' },
+          { id: 'c', text: '北京爆發五四運動，高呼「外爭主權，內除國賊」（1919年5月）' },
+          { id: 'd', text: '張學良宣佈「東北易幟」，北洋軍閥統治正式落幕（1928年12月）' }
+        ],
+        answerOrder: ['a', 'b', 'c', 'd'],
+        explanation: '正確時序：1915年12月洪憲帝制（第1章） → 1917年9月護法運動（第2章） → 1919年5月五四運動（第3章） → 1928年12月東北易幟（第2章）。'
+      }
+    ];
+
+    /**
+     * ============================================================================
+     * 應用程式狀態管理 (State)
+     * ============================================================================
+     */
+    const state = {
+      mode: 'practice', // 'practice' (即時溫習) | 'exam' (模擬測驗)
+      examSubmitted: false,
+      chapterFilter: 'all', // 'all' | '1' | '2' | '3'
+      typeFilter: 'all',    // 'all' | 'mc' | 'fill' | 'sort'
+      wrongOnly: false,
+      currentPage: 1,
+      pageSize: 10,
+      questionsOrder: [],   // 儲存目前題目順序 (question objects)
+      userAnswers: {},      // { [id]: number | string | string[] }
+      checkedMap: {},       // { [id]: { submitted: boolean, isCorrect: boolean } }
+      sortUserOrders: {}    // { [id]: string[] } 儲存每題時序題的當前排列
+    };
+
+    // 初始化題目順序與時序題隨機初始排列
+    function initBank(shuffleAll = false) {
+      let list = QUESTION_BANK.map(q => ({ ...q }));
+      if (shuffleAll) {
+        for (let i = list.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [list[i], list[j]] = [list[j], list[i]];
+        }
+      }
+      state.questionsOrder = list;
+
+      // 為所有時序題建立打亂的初始順序（確保不等於正確答案）
+      list.forEach(q => {
+        if (q.type === 'sort' && !state.sortUserOrders[q.id]) {
+          state.sortUserOrders[q.id] = getShuffledSortIds(q);
+        }
+      });
+    }
+
+    function getShuffledSortIds(q) {
+      const ids = q.items.map(item => item.id);
+      let shuffled = [...ids];
+      let attempts = 0;
+      do {
+        for (let i = shuffled.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        attempts++;
+      } while (shuffled.join(',') === q.answerOrder.join(',') && attempts < 10);
+      return shuffled;
+    }
+
+    // 寬容字串正規化（用於填充題批改）
+    function normalizeText(str) {
+      if (!str) return '';
+      return str
+        .trim()
+        .replace(/[\s《》「」『』()（）\[\]【】、，。．·・\-—_]/g, '')
+        .toLowerCase();
+    }
+
+    // 批改單題邏輯
+    function evaluateQuestion(q) {
+      const ans = state.userAnswers[q.id];
+      if (q.type === 'mc') {
+        if (ans === undefined || ans === null) return null;
+        return ans === q.answer;
+      }
+      if (q.type === 'fill') {
+        if (!ans || ans.trim() === '') return null;
+        const normUser = normalizeText(ans);
+        return q.answers.some(valid => normalizeText(valid) === normUser);
+      }
+      if (q.type === 'sort') {
+        const currentOrder = state.sortUserOrders[q.id];
+        if (!currentOrder) return null;
+        return currentOrder.join(',') === q.answerOrder.join(',');
+      }
+      return null;
+    }
+
+    // 取得篩選後的題目列表
+    function getFilteredQuestions() {
+      return state.questionsOrder.filter(q => {
+        if (state.chapterFilter !== 'all' && String(q.chapter) !== state.chapterFilter) return false;
+        if (state.typeFilter !== 'all' && q.type !== state.typeFilter) return false;
+        if (state.wrongOnly) {
+          const status = state.checkedMap[q.id];
+          if (!status || !status.submitted || status.isCorrect) return false;
+        }
+        return true;
+      });
+    }
+
+    // 輕量提示 Toast
+    let toastTimer = null;
+    function showToast(msg) {
+      const box = document.getElementById('toastBox');
+      const text = document.getElementById('toastText');
+      text.textContent = msg;
+      box.classList.remove('opacity-0', '-translate-y-2');
+      box.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        box.classList.remove('opacity-100', 'translate-y-0');
+        box.classList.add('opacity-0', '-translate-y-2');
+      }, 2200);
+    }
+
+    // 更新頂部統計數據
+    function updateStats() {
+      const total = QUESTION_BANK.length;
+      let answered = 0;
+      let correct = 0;
+      let wrong = 0;
+
+      QUESTION_BANK.forEach(q => {
+        const st = state.checkedMap[q.id];
+        if (st && st.submitted) {
+          answered++;
+          if (st.isCorrect) correct++;
+          else wrong++;
+        } else if (state.mode === 'exam' && !state.examSubmitted) {
+          // 測驗未交卷時計算已作答題數
+          if (q.type === 'mc' && state.userAnswers[q.id] !== undefined) answered++;
+          if (q.type === 'fill' && state.userAnswers[q.id] && state.userAnswers[q.id].trim() !== '') answered++;
+          if (q.type === 'sort' && state.userAnswers[q.id] === 'touched') answered++;
+        }
+      });
+
+      document.getElementById('statTotal').textContent = total;
+      document.getElementById('statAnswered').textContent = answered;
+      document.getElementById('statCorrect').textContent = correct;
+      document.getElementById('statWrong').textContent = wrong;
+
+      const btnWrong = document.getElementById('btnToggleWrongOnly');
+      if (state.wrongOnly) {
+        btnWrong.classList.add('bg-rose-500', 'text-white', 'border-rose-300');
+        btnWrong.classList.remove('bg-rose-500/20', 'text-rose-200');
+      } else {
+        btnWrong.classList.remove('bg-rose-500', 'text-white', 'border-rose-300');
+        btnWrong.classList.add('bg-rose-500/20', 'text-rose-200');
+      }
+    }
+
+    // 渲染題目卡片與分頁
+    function render() {
+      updateStats();
+
+      const filtered = getFilteredQuestions();
+      const totalItems = filtered.length;
+      const totalPages = Math.max(1, Math.ceil(totalItems / state.pageSize));
+      if (state.currentPage > totalPages) state.currentPage = totalPages;
+      if (state.currentPage < 1) state.currentPage = 1;
+
+      document.getElementById('filterSummaryBadge').textContent = `共 ${totalItems} 題`;
+      document.getElementById('currentPageText').textContent = `第 ${state.currentPage} 頁`;
+      document.getElementById('totalPagesText').textContent = `共 ${totalPages} 頁`;
+
+      const prevBtn = document.getElementById('btnPrevPage');
+      const nextBtn = document.getElementById('btnNextPage');
+      prevBtn.disabled = state.currentPage <= 1;
+      nextBtn.disabled = state.currentPage >= totalPages;
+
+      // 測驗模式底部交卷按鈕顯示控制
+      const submitExamBtn = document.getElementById('btnSubmitExam');
+      if (state.mode === 'exam' && !state.examSubmitted) {
+        submitExamBtn.classList.remove('hidden');
+      } else {
+        submitExamBtn.classList.add('hidden');
+      }
+
+      const container = document.getElementById('questionsContainer');
+      const emptyState = document.getElementById('emptyState');
+
+      if (totalItems === 0) {
+        container.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+      emptyState.classList.add('hidden');
+
+      const startIdx = (state.currentPage - 1) * state.pageSize;
+      const pageItems = filtered.slice(startIdx, startIdx + state.pageSize);
+
+      container.innerHTML = pageItems.map((q, idx) => renderQuestionCard(q, startIdx + idx + 1)).join('');
+      bindCardEvents(pageItems);
+    }
+
+    function getChapterBadge(ch) {
+      if (ch === 1) return { label: '第1章・袁世凱掌權', cls: 'bg-indigo-500/25 text-indigo-200 border-indigo-400/35' };
+      if (ch === 2) return { label: '第2章・北洋軍閥', cls: 'bg-purple-500/25 text-purple-200 border-purple-400/35' };
+      return { label: '第3章・山東與五四', cls: 'bg-emerald-500/25 text-emerald-200 border-emerald-400/35' };
+    }
+
+    function getTypeBadge(type) {
+      if (type === 'mc') return { label: '選擇題', icon: 'fa-regular fa-circle-dot', cls: 'text-cyan-300' };
+      if (type === 'fill') return { label: '填充題', icon: 'fa-solid fa-pen-to-square', cls: 'text-indigo-300' };
+      return { label: '時序排列', icon: 'fa-solid fa-arrow-down-1-9', cls: 'text-purple-300' };
+    }
+
+    function renderQuestionCard(q, displayNum) {
+      const chBadge = getChapterBadge(q.chapter);
+      const typeBadge = getTypeBadge(q.type);
+      const checked = state.checkedMap[q.id];
+      const showFeedback = checked && checked.submitted && (state.mode === 'practice' || state.examSubmitted);
+
+      let cardBorder = 'border-white/18';
+      if (showFeedback) {
+        cardBorder = checked.isCorrect ? 'border-emerald-400/60' : 'border-rose-400/60';
+      }
+
+      let bodyHtml = '';
+
+      // 1. 選擇題（手機單欄 / 平板 2x2 網格）
+      if (q.type === 'mc') {
+        const letters = ['A', 'B', 'C', 'D'];
+        const userChoice = state.userAnswers[q.id];
+        bodyHtml = `
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 mt-3.5">
+            ${q.options.map((opt, optIdx) => {
+              let optStyle = 'touch-option-btn text-slate-100';
+              let badgeStyle = 'bg-white/10 text-cyan-200 border-white/15';
+              let statusIcon = '';
+
+              if (showFeedback) {
+                if (optIdx === q.answer) {
+                  optStyle = 'bg-emerald-500/25 border-emerald-400/75 text-white shadow-md shadow-emerald-500/15';
+                  badgeStyle = 'bg-emerald-500 text-slate-950 font-black border-emerald-300';
+                  statusIcon = '<i class="fa-solid fa-circle-check text-emerald-400 text-lg shrink-0"></i>';
+                } else if (optIdx === userChoice && userChoice !== q.answer) {
+                  optStyle = 'bg-rose-500/25 border-rose-400/75 text-rose-100';
+                  badgeStyle = 'bg-rose-500 text-white font-black border-rose-300';
+                  statusIcon = '<i class="fa-solid fa-circle-xmark text-rose-400 text-lg shrink-0"></i>';
+                } else {
+                  optStyle = 'bg-white/[0.03] border-white/10 text-slate-400 opacity-75';
+                }
+              } else if (userChoice === optIdx) {
+                optStyle = 'bg-indigo-500/35 border-indigo-300/80 text-white shadow-md shadow-indigo-500/20';
+                badgeStyle = 'bg-indigo-400 text-slate-950 font-black border-indigo-200';
+              }
+
+              const disabledAttr = (state.mode === 'exam' && state.examSubmitted) ? 'disabled' : '';
+              return `
+                <button type="button" data-qid="${q.id}" data-opt="${optIdx}" ${disabledAttr}
+                  class="mc-opt-btn ${optStyle} w-full rounded-2xl p-3.5 text-left flex items-center justify-between gap-3">
+                  <div class="flex items-start gap-3">
+                    <span class="w-7 h-7 rounded-xl border ${badgeStyle} flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">${letters[optIdx]}</span>
+                    <span class="text-sm sm:text-[15px] leading-snug font-medium">${opt}</span>
+                  </div>
+                  ${statusIcon}
+                </button>
+              `;
+            }).join('')}
+          </div>
+        `;
+      }
+
+      // 2. 填充題（16px 防止 iOS 自動放大）
+      if (q.type === 'fill') {
+        const val = state.userAnswers[q.id] || '';
+        const disabledAttr = (state.mode === 'exam' && state.examSubmitted) ? 'disabled' : '';
+        let inputBorder = 'border-white/20 focus:border-cyan-400';
+        if (showFeedback) {
+          inputBorder = checked.isCorrect ? 'border-emerald-400 bg-emerald-500/15' : 'border-rose-400 bg-rose-500/15';
+        }
+
+        bodyHtml = `
+          <div class="mt-3.5 flex flex-col sm:flex-row gap-2.5">
+            <input type="text" data-qid="${q.id}" value="${val.replace(/"/g, '&quot;')}" ${disabledAttr}
+              placeholder="請輸入史實名詞／人名（支援簡稱）..."
+              autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+              class="fill-input ios-safe-input flex-1 rounded-2xl bg-slate-950/60 border ${inputBorder} px-4 py-2.5 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-400/40 transition" />
+            ${state.mode === 'practice' ? `
+              <button type="button" data-qid="${q.id}" class="fill-check-btn min-h-[48px] px-5 rounded-2xl bg-gradient-to-r from-indigo-500 to-cyan-500 text-white font-bold text-sm shadow-md active:scale-95 transition shrink-0 flex items-center justify-center gap-1.5">
+                <i class="fa-solid fa-check"></i>
+                <span>核對答案</span>
+              </button>
+            ` : ''}
+          </div>
+        `;
+      }
+
+      // 3. 時序排列題（支援觸控拖曳 + 大尺寸上移▲／下移▼按鈕）
+      if (q.type === 'sort') {
+        const currentIds = state.sortUserOrders[q.id] || q.items.map(i => i.id);
+        const itemMap = Object.fromEntries(q.items.map(i => [i.id, i]));
+        const isLocked = (state.mode === 'exam' && state.examSubmitted);
+
+        bodyHtml = `
+          <div class="mt-3 text-xs text-cyan-200/90 flex items-center justify-between">
+            <span><i class="fa-solid fa-hand-pointer mr-1"></i>可長按拖曳排序，或點擊右側「▲／▼」按鈕調整先後</span>
+          </div>
+          <div class="sort-list mt-2.5 space-y-2" data-qid="${q.id}">
+            ${currentIds.map((itemId, posIdx) => {
+              const item = itemMap[itemId];
+              let itemStyle = 'bg-white/[0.07] border-white/15';
+              if (showFeedback) {
+                const isPosCorrect = q.answerOrder[posIdx] === itemId;
+                itemStyle = isPosCorrect
+                  ? 'bg-emerald-500/20 border-emerald-400/65'
+                  : 'bg-rose-500/20 border-rose-400/65';
+              }
+
+              return `
+                <div class="sort-item ${itemStyle} rounded-2xl p-2.5 sm:p-3 border flex items-center justify-between gap-2"
+                  data-qid="${q.id}" data-itemid="${itemId}" draggable="${!isLocked}">
+                  <div class="flex items-center gap-2.5 min-w-0">
+                    <span class="w-7 h-7 rounded-xl bg-indigo-500/30 border border-indigo-300/40 text-indigo-100 font-extrabold text-xs flex items-center justify-center shrink-0">
+                      ${posIdx + 1}
+                    </span>
+                    <span class="text-sm text-slate-100 leading-snug font-medium">${item.text}</span>
+                  </div>
+
+                  ${!isLocked ? `
+                    <div class="flex items-center gap-1 shrink-0">
+                      <button type="button" data-qid="${q.id}" data-idx="${posIdx}" data-dir="-1"
+                        ${posIdx === 0 ? 'disabled' : ''}
+                        class="sort-move-btn w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 disabled:opacity-25 flex items-center justify-center text-white text-xs active:scale-90 transition"
+                        aria-label="上移一項">
+                        ▲
+                      </button>
+                      <button type="button" data-qid="${q.id}" data-idx="${posIdx}" data-dir="1"
+                        ${posIdx === currentIds.length - 1 ? 'disabled' : ''}
+                        class="sort-move-btn w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 disabled:opacity-25 flex items-center justify-center text-white text-xs active:scale-90 transition"
+                        aria-label="下移一項">
+                        ▼
+                      </button>
+                    </div>
+                  ` : ''}
+                </div>
+              `;
+            }).join('')}
+          </div>
+          ${state.mode === 'practice' ? `
+            <div class="mt-3 flex justify-end">
+              <button type="button" data-qid="${q.id}" class="sort-check-btn min-h-[46px] px-5 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-500 text-white font-bold text-sm shadow-md active:scale-95 transition flex items-center gap-1.5">
+                <i class="fa-solid fa-check-double"></i>
+                <span>確認時序</span>
+              </button>
+            </div>
+          ` : ''}
+        `;
+      }
+
+      // 史實解析區塊
+      let feedbackHtml = '';
+      if (showFeedback) {
+        const statusBanner = checked.isCorrect
+          ? `<div class="flex items-center gap-1.5 text-emerald-300 font-extrabold text-sm mb-1.5"><i class="fa-solid fa-circle-check"></i> 回答正確！</div>`
+          : `<div class="flex items-center gap-1.5 text-rose-300 font-extrabold text-sm mb-1.5"><i class="fa-solid fa-circle-xmark"></i> 回答未達標，請參閱解析</div>`;
+
+        let correctRef = '';
+        if (!checked.isCorrect) {
+          if (q.type === 'mc') {
+            const letters = ['A', 'B', 'C', 'D'];
+            correctRef = `<div class="text-xs sm:text-sm text-emerald-300 font-bold mb-1.5">正確答案：(${letters[q.answer]}) ${q.options[q.answer]}</div>`;
+          } else if (q.type === 'fill') {
+            correctRef = `<div class="text-xs sm:text-sm text-emerald-300 font-bold mb-1.5">標準答案：${q.answers[0]}</div>`;
+          } else if (q.type === 'sort') {
+            const itemMap = Object.fromEntries(q.items.map(i => [i.id, i.text]));
+            const orderedTexts = q.answerOrder.map((id, i) => `${i + 1}. ${itemMap[id]}`).join(' → ');
+            correctRef = `<div class="text-xs sm:text-sm text-emerald-300 font-bold mb-1.5">正確先後次序：${orderedTexts}</div>`;
+          }
+        }
+
+        feedbackHtml = `
+          <div class="mt-4 rounded-2xl bg-slate-950/65 border border-white/15 p-3.5 sm:p-4">
+            ${statusBanner}
+            ${correctRef}
+            <div class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              <span class="inline-block px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-bold text-xs mr-1">DSE 史實解析</span>
+              ${q.explanation}
+            </div>
+          </div>
+        `;
+      }
+
+      return `
+        <article class="liquid-glass rounded-3xl p-4 sm:p-5 border ${cardBorder} transition-all" id="qcard-${q.id}">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-xl bg-white/10 text-white font-extrabold text-xs">Q${displayNum} <span class="text-slate-400 font-normal">(#${q.id})</span></span>
+              <span class="px-2.5 py-1 rounded-full border text-[11px] font-bold ${chBadge.cls}">${chBadge.label}</span>
+            </div>
+            <span class="text-xs font-bold ${typeBadge.cls} flex items-center gap-1">
+              <i class="${typeBadge.icon}"></i> ${typeBadge.label}
+            </span>
+          </div>
+
+          <h3 class="mt-3 text-[15px] sm:text-base font-bold text-white leading-relaxed">
+            ${q.question}
+          </h3>
+
+          ${bodyHtml}
+          ${feedbackHtml}
+        </article>
+      `;
+    }
+
+    // 綁定題目卡片互動事件（支援觸控與滑鼠）
+    function bindCardEvents(pageItems) {
+      // 1. 選擇題點擊
+      document.querySelectorAll('.mc-opt-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const qid = Number(btn.dataset.qid);
+          const optIdx = Number(btn.dataset.opt);
+          const q = QUESTION_BANK.find(item => item.id === qid);
+          if (!q) return;
+
+          state.userAnswers[qid] = optIdx;
+          if (state.mode === 'practice') {
+            state.checkedMap[qid] = {
+              submitted: true,
+              isCorrect: optIdx === q.answer
+            };
+          }
+          render();
+        });
+      });
+
+      // 2. 填充題輸入與核對
+      document.querySelectorAll('.fill-input').forEach(input => {
+        input.addEventListener('input', (e) => {
+          const qid = Number(e.target.dataset.qid);
+          state.userAnswers[qid] = e.target.value;
+          if (state.mode === 'exam' && !state.examSubmitted) {
+            updateStats();
+          }
+        });
+
+        input.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && state.mode === 'practice') {
+            e.preventDefault();
+            const qid = Number(input.dataset.qid);
+            checkFillQuestion(qid);
+          }
+        });
+      });
+
+      document.querySelectorAll('.fill-check-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const qid = Number(btn.dataset.qid);
+          checkFillQuestion(qid);
+        });
+      });
+
+      // 3. 時序題上下按鈕與觸控拖曳
+      document.querySelectorAll('.sort-move-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const qid = Number(btn.dataset.qid);
+          const idx = Number(btn.dataset.idx);
+          const dir = Number(btn.dataset.dir);
+          moveSortItem(qid, idx, idx + dir);
+        });
+      });
+
+      document.querySelectorAll('.sort-check-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const qid = Number(btn.dataset.qid);
+          const q = QUESTION_BANK.find(item => item.id === qid);
+          if (!q) return;
+          const isCorrect = evaluateQuestion(q);
+          state.checkedMap[qid] = { submitted: true, isCorrect };
+          render();
+        });
+      });
+
+      // 綁定觸控與滑鼠拖曳排序
+      setupSortDragAndDrop();
+    }
+
+    function checkFillQuestion(qid) {
+      const q = QUESTION_BANK.find(item => item.id === qid);
+      if (!q) return;
+      const val = state.userAnswers[qid];
+      if (!val || val.trim() === '') {
+        showToast('請先輸入答案再核對！');
+        return;
+      }
+      const isCorrect = evaluateQuestion(q);
+      state.checkedMap[qid] = { submitted: true, isCorrect };
+      render();
+    }
+
+    function moveSortItem(qid, fromIdx, toIdx) {
+      const arr = state.sortUserOrders[qid];
+      if (!arr || toIdx < 0 || toIdx >= arr.length) return;
+      const [moved] = arr.splice(fromIdx, 1);
+      arr.splice(toIdx, 0, moved);
+      state.userAnswers[qid] = 'touched';
+
+      if (state.mode === 'practice' && state.checkedMap[qid]?.submitted) {
+        const q = QUESTION_BANK.find(item => item.id === qid);
+        state.checkedMap[qid].isCorrect = evaluateQuestion(q);
+      }
+      render();
+    }
+
+    // 支援手機觸控 (Touch) 與桌面滑鼠拖曳排序
+    function setupSortDragAndDrop() {
+      const lists = document.querySelectorAll('.sort-list');
+      lists.forEach(list => {
+        const qid = Number(list.dataset.qid);
+        let dragEl = null;
+
+        // 桌面 HTML5 Drag & Drop
+        list.querySelectorAll('.sort-item').forEach(item => {
+          item.addEventListener('dragstart', () => {
+            dragEl = item;
+            item.classList.add('dragging');
+          });
+          item.addEventListener('dragend', () => {
+            item.classList.remove('dragging');
+            syncSortOrderFromDOM(list, qid);
+            dragEl = null;
+          });
+          item.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            if (!dragEl || dragEl === item) return;
+            const rect = item.getBoundingClientRect();
+            const midY = rect.top + rect.height / 2;
+            if (e.clientY < midY) {
+              list.insertBefore(dragEl, item);
+            } else {
+              list.insertBefore(dragEl, item.nextSibling);
+            }
+          });
+
+          // 手機／平板觸控拖曳 (Touch Events)
+          let touchStartY = 0;
+          let isTouchDragging = false;
+          let holdTimer = null;
+
+          item.addEventListener('touchstart', (e) => {
+            if (e.target.closest('.sort-move-btn')) return;
+            if (state.mode === 'exam' && state.examSubmitted) return;
+            touchStartY = e.touches[0].clientY;
+            holdTimer = setTimeout(() => {
+              isTouchDragging = true;
+              dragEl = item;
+              item.classList.add('dragging');
+              if (navigator.vibrate) navigator.vibrate(25);
+            }, 180);
+          }, { passive: true });
+
+          item.addEventListener('touchmove', (e) => {
+            if (!isTouchDragging) {
+              if (Math.abs(e.touches[0].clientY - touchStartY) > 10) {
+                clearTimeout(holdTimer);
+              }
+              return;
+            }
+            e.preventDefault();
+            const touchY = e.touches[0].clientY;
+            const siblings = [...list.querySelectorAll('.sort-item:not(.dragging)')];
+            for (const sib of siblings) {
+              const rect = sib.getBoundingClientRect();
+              const midY = rect.top + rect.height / 2;
+              if (touchY < midY) {
+                list.insertBefore(dragEl, sib);
+                break;
+              } else if (sib === siblings[siblings.length - 1]) {
+                list.appendChild(dragEl);
+              }
+            }
+          }, { passive: false });
+
+          const endTouchDrag = () => {
+            clearTimeout(holdTimer);
+            if (isTouchDragging && dragEl) {
+              dragEl.classList.remove('dragging');
+              syncSortOrderFromDOM(list, qid);
+            }
+            isTouchDragging = false;
+            dragEl = null;
+          };
+
+          item.addEventListener('touchend', endTouchDrag);
+          item.addEventListener('touchcancel', endTouchDrag);
+        });
+      });
+    }
+
+    function syncSortOrderFromDOM(listEl, qid) {
+      const newOrder = [...listEl.querySelectorAll('.sort-item')].map(el => el.dataset.itemid);
+      state.sortUserOrders[qid] = newOrder;
+      state.userAnswers[qid] = 'touched';
+      if (state.mode === 'practice' && state.checkedMap[qid]?.submitted) {
+        const q = QUESTION_BANK.find(item => item.id === qid);
+        state.checkedMap[qid].isCorrect = evaluateQuestion(q);
+      }
+      render();
+    }
+
+    // ============================================================================
+    // 頂部與底部控制列事件綁定
+    // ============================================================================
+    function bindGlobalControls() {
+      // 模式切換：即時溫習 vs 模擬測驗
+      const btnPractice = document.getElementById('modePractice');
+      const btnExam = document.getElementById('modeExam');
+
+      btnPractice.addEventListener('click', () => {
+        if (state.mode === 'practice') return;
+        state.mode = 'practice';
+        btnPractice.className = 'flex-1 min-h-[40px] rounded-xl text-xs sm:text-sm font-bold transition-all bg-gradient-to-r from-indigo-500 to-cyan-500 text-white shadow-md flex items-center justify-center gap-1.5';
+        btnExam.className = 'flex-1 min-h-[40px] rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all flex items-center justify-center gap-1.5';
+        showToast('已切換至「即時溫習模式」');
+        render();
+      });
+
+      btnExam.addEventListener('click', () => {
+        if (state.mode === 'exam') return;
+        state.mode = 'exam';
+        state.examSubmitted = false;
+        state.checkedMap = {};
+        state.wrongOnly = false;
+        btnExam.className = 'flex-1 min-h-[40px] rounded-xl text-xs sm:text-sm font-bold transition-all bg-gradient-to-r from-purple-500 to-pink-500 text-white shadow-md flex items-center justify-center gap-1.5';
+        btnPractice.className = 'flex-1 min-h-[40px] rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all flex items-center justify-center gap-1.5';
+        showToast('已進入「模擬測驗模式」，完成後請按交卷');
+        render();
+      });
+
+      // 章節篩選膠囊
+      document.querySelectorAll('.chapter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.chapter-pill').forEach(p => {
+            p.classList.remove('active');
+            p.classList.add('text-slate-200');
+          });
+          pill.classList.add('active');
+          pill.classList.remove('text-slate-200');
+          state.chapterFilter = pill.dataset.chapter;
+          state.currentPage = 1;
+          render();
+        });
+      });
+
+      // 題型篩選膠囊
+      document.querySelectorAll('.type-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.type-pill').forEach(p => {
+            p.classList.remove('active');
+            p.classList.add('text-slate-200');
+          });
+          pill.classList.add('active');
+          pill.classList.remove('text-slate-200');
+          state.typeFilter = pill.dataset.type;
+          state.currentPage = 1;
+          render();
+        });
+      });
+
+      // 只看錯題切換
+      document.getElementById('btnToggleWrongOnly').addEventListener('click', () => {
+        state.wrongOnly = !state.wrongOnly;
+        state.currentPage = 1;
+        showToast(state.wrongOnly ? '已開啟「只看錯題」篩選' : '已顯示全部題目');
+        render();
+      });
+
+      // 空狀態清除篩選
+      document.getElementById('btnClearFilters').addEventListener('click', () => {
+        state.wrongOnly = false;
+        state.chapterFilter = 'all';
+        state.typeFilter = 'all';
+        document.querySelectorAll('.chapter-pill').forEach((p, idx) => p.classList.toggle('active', idx === 0));
+        document.querySelectorAll('.type-pill').forEach((p, idx) => p.classList.toggle('active', idx === 0));
+        state.currentPage = 1;
+        render();
+      });
+
+      // 洗牌按鈕
+      document.getElementById('btnShuffle').addEventListener('click', () => {
+        initBank(true);
+        state.currentPage = 1;
+        showToast('題目順序已隨機洗牌！');
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 全部重置
+      document.getElementById('btnResetAll').addEventListener('click', () => {
+        state.userAnswers = {};
+        state.checkedMap = {};
+        state.sortUserOrders = {};
+        state.examSubmitted = false;
+        state.wrongOnly = false;
+        state.currentPage = 1;
+        initBank(false);
+        showToast('已重置所有作答紀錄');
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 底部上一頁 / 下一頁
+      document.getElementById('btnPrevPage').addEventListener('click', () => {
+        if (state.currentPage > 1) {
+          state.currentPage--;
+          render();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      document.getElementById('btnNextPage').addEventListener('click', () => {
+        const totalPages = Math.max(1, Math.ceil(getFilteredQuestions().length / state.pageSize));
+        if (state.currentPage < totalPages) {
+          state.currentPage++;
+          render();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+      });
+
+      // 模擬測驗交卷批改
+      document.getElementById('btnSubmitExam').addEventListener('click', () => {
+        let correctCount = 0;
+        const totalCount = QUESTION_BANK.length;
+
+        QUESTION_BANK.forEach(q => {
+          const evalRes = evaluateQuestion(q);
+          const isCorrect = evalRes === true;
+          if (isCorrect) correctCount++;
+          state.checkedMap[q.id] = {
+            submitted: true,
+            isCorrect
+          };
+        });
+
+        state.examSubmitted = true;
+        render();
+
+        // 顯示成績單 Bottom Sheet
+        const pct = Math.round((correctCount / totalCount) * 100);
+        const wrongCount = totalCount - correctCount;
+        document.getElementById('resScorePct').textContent = `${pct}%`;
+        document.getElementById('resCorrectCount').textContent = `${correctCount} / ${totalCount}`;
+        document.getElementById('resWrongCount').textContent = `${wrongCount} 題`;
+
+        let comment = '';
+        if (pct >= 85) {
+          comment = '🌟 表現極為卓越！你對民初政局（第1至3章）的史實脈絡、關鍵條約與人物關係掌握得非常紮實，完全具備奪取 HKDSE 5** 的實力！';
+        } else if (pct >= 65) {
+          comment = '👍 基礎良好！大部分核心史實已能準確辨析，建議點擊下方「檢視錯題解析」針對易混淆條約（如《民四條約》與《善後大借款》）及時序題再作鞏固。';
+        } else {
+          comment = '💪 繼續加油！建議先開啟右上角「時間軸」梳理 1912–1928 年重大事件先後次序，再配合「只看錯題」逐題重溫 DSE 史實解析。';
+        }
+        document.getElementById('resComment').textContent = comment;
+        openModal('examResultModal');
+      });
+
+      // 成績單按鈕
+      document.getElementById('btnCloseResultModal').addEventListener('click', () => closeModal('examResultModal'));
+      document.getElementById('btnReviewWrongFromModal').addEventListener('click', () => {
+        closeModal('examResultModal');
+        state.wrongOnly = true;
+        state.currentPage = 1;
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 時間軸 Bottom Sheet 開關
+      document.getElementById('btnOpenTimeline').addEventListener('click', () => openModal('timelineModal'));
+      document.getElementById('btnCloseTimeline').addEventListener('click', () => closeModal('timelineModal'));
+
+      // 點擊遮罩背景關閉 Modal
+      ['timelineModal', 'examResultModal'].forEach(modalId => {
+        const backdrop = document.getElementById(modalId);
+        backdrop.addEventListener('click', (e) => {
+          if (e.target === backdrop) closeModal(modalId);
+        });
+      });
+    }
+
+    function openModal(id) {
+      const el = document.getElementById(id);
+      el.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(id) {
+      const el = document.getElementById(id);
+      el.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // 啟動應用程式
+    window.addEventListener('DOMContentLoaded', () => {
+      initBank(false);
+      bindGlobalControls();
+      render();
+    });
+  </script>
+</body>
+</html>
