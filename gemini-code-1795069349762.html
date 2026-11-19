@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HKDSE 中國歷史｜辛亥革命專題溫習（Liquid Glass 互動練習）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.48);
+            --glass-border: rgba(255, 255, 255, 0.75);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
+            --accent: #0f766e;
+            --accent-light: #14b8a6;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
+
+        input {
+            user-select: text;
+            -webkit-user-select: text;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang HK", "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #1e293b;
+            background: linear-gradient(135deg, #e0f2fe 0%, #f0fdfa 35%, #fef3c7 75%, #fae8ff 100%);
+            background-attachment: fixed;
+        }
+
+        /* 流動液態光暈背景 */
+        .liquid-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(70px);
+            z-index: -1;
+            opacity: 0.65;
+            animation: floatOrb 16s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+        .orb-1 { width: 320px; height: 320px; background: #5eead4; top: -60px; left: -60px; }
+        .orb-2 { width: 380px; height: 380px; background: #93c5fd; bottom: -80px; right: -80px; animation-delay: -5s; }
+        .orb-3 { width: 260px; height: 260px; background: #fde68a; top: 45%; left: 55%; animation-delay: -10s; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(25px, -30px) scale(1.08); }
+            100% { transform: translate(-20px, 25px) scale(0.95); }
+        }
+
+        /* Liquid Glass 卡片效果 */
+        .liquid-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(22px) saturate(180%);
+            -webkit-backdrop-filter: blur(22px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+        }
+
+        .liquid-btn {
+            min-height: 46px;
+            min-width: 46px;
+            background: rgba(255, 255, 255, 0.62);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.85);
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255,255,255,0.9);
+            transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+            cursor: pointer;
+        }
+
+        .liquid-btn:active {
+            transform: scale(0.97);
+        }
+
+        .liquid-btn.selected {
+            background: linear-gradient(135deg, rgba(13, 148, 136, 0.9), rgba(15, 118, 110, 0.95));
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 6px 18px rgba(13, 148, 136, 0.3);
+        }
+
+        .liquid-btn.correct {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.92), rgba(5, 150, 105, 0.95)) !important;
+            color: white !important;
+            border-color: #a7f3d0 !important;
+        }
+
+        .liquid-btn.wrong {
+            background: linear-gradient(135deg, rgba(244, 63, 94, 0.92), rgba(225, 29, 72, 0.95)) !important;
+            color: white !important;
+            border-color: #fecdd3 !important;
+        }
+
+        /* 隱藏滾動條但保持滾動功能 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* 微動畫 */
+        @keyframes slideFadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-question {
+            animation: slideFadeIn 0.28s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-teal-200">
+    <!-- 背景光球 -->
+    <div class="liquid-orb orb-1"></div>
+    <div class="liquid-orb orb-2"></div>
+    <div class="liquid-orb orb-3"></div>
+
+    <!-- 主容器 -->
+    <div class="max-w-3xl mx-auto px-3 sm:px-6 py-4 sm:py-6 pb-24">
+        
+        <!-- 頂部導航與標題卡片 -->
+        <header class="liquid-glass rounded-3xl p-4 sm:p-5 mb-4">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <div>
+                    <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-teal-700/15 text-teal-900 border border-teal-700/20 mb-1">
+                        HKDSE 中國歷史科｜中五級溫習工作紙
+                    </span>
+                    <h1 class="text-xl sm:text-2xl font-bold tracking-tight text-slate-800">
+                        推翻滿清的革命運動（辛亥革命）
+                    </h1>
+                    <p class="text-xs sm:text-sm text-slate-600 mt-0.5">
+                        聚焦人名、地名、事件名｜共 90 題（三大題型各 30 題）
+                    </p>
+                </div>
+                <div class="flex items-center gap-2 self-start sm:self-center">
+                    <div class="liquid-glass rounded-2xl px-3.5 py-2 text-center">
+                        <div class="text-[11px] text-slate-500 font-medium">本組得分</div>
+                        <div id="scoreDisplay" class="text-lg font-extrabold text-teal-700">0 / 30</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 題型切換 Tabs -->
+            <nav class="grid grid-cols-3 gap-2 mt-4" role="tablist">
+                <button type="button" id="tab-mc" onclick="switchMode('mc')" class="liquid-btn selected rounded-2xl py-2.5 px-2 text-sm sm:text-base font-bold flex flex-col sm:flex-row items-center justify-center gap-1">
+                    <span>選擇題</span>
+                    <span id="badge-mc" class="text-xs opacity-85 font-normal">(0/30)</span>
+                </button>
+                <button type="button" id="tab-fill" onclick="switchMode('fill')" class="liquid-btn rounded-2xl py-2.5 px-2 text-sm sm:text-base font-bold flex flex-col sm:flex-row items-center justify-center gap-1">
+                    <span>填充題</span>
+                    <span id="badge-fill" class="text-xs opacity-85 font-normal">(0/30)</span>
+                </button>
+                <button type="button" id="tab-order" onclick="switchMode('order')" class="liquid-btn rounded-2xl py-2.5 px-2 text-sm sm:text-base font-bold flex flex-col sm:flex-row items-center justify-center gap-1">
+                    <span>排序題</span>
+                    <span id="badge-order" class="text-xs opacity-85 font-normal">(0/30)</span>
+                </button>
+            </nav>
+
+            <!-- 題號快速跳轉列 -->
+            <div class="mt-3 pt-3 border-t border-white/50">
+                <div class="flex items-center justify-between text-xs text-slate-600 mb-1.5 px-1">
+                    <span id="modeDesc">四選一單項選擇題（點擊選項即時核對）</span>
+                    <span id="progressText" class="font-semibold text-teal-800">第 1 / 30 題</span>
+                </div>
+                <div id="qNavigator" class="flex gap-1.5 overflow-x-auto no-scrollbar py-1">
+                    <!-- 動態生成 1-30 題號按鈕 -->
+                </div>
+            </div>
+        </header>
+
+        <!-- 題目互動主區域 -->
+        <main id="questionContainer" class="liquid-glass rounded-3xl p-4 sm:p-6 min-h-[360px] flex flex-col justify-between animate-question">
+            <!-- 內容由 JS 動態渲染 -->
+        </main>
+
+        <!-- 底部導航控制列 -->
+        <footer class="fixed bottom-0 left-0 right-0 p-3 z-30 pointer-events-none">
+            <div class="max-w-3xl mx-auto flex items-center justify-between gap-2 pointer-events-auto liquid-glass rounded-2xl p-2 shadow-lg">
+                <button type="button" id="prevBtn" onclick="prevQuestion()" class="liquid-btn rounded-xl px-4 py-2.5 font-bold text-slate-700 flex items-center gap-1 text-sm sm:text-base">
+                    <span>‹ 上一題</span>
+                </button>
+                
+                <button type="button" onclick="resetCurrentMode()" class="liquid-btn rounded-xl px-3 py-2.5 text-xs sm:text-sm font-semibold text-rose-700">
+                    重設本組
+                </button>
+
+                <button type="button" id="nextBtn" onclick="nextQuestion()" class="liquid-btn selected rounded-xl px-5 py-2.5 font-bold flex items-center gap-1 text-sm sm:text-base">
+                    <span>下一題 ›</span>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ==========================================
+        // 題庫資料庫：嚴格依據 HKDSE 課程與《課題2 改革與革命》課本內容
+        // 涵蓋：選擇題 30 題、填充題 30 題、排序題 30 題（聚焦人名、地名、事件名）
+        // ==========================================
+        const quizData = {
+            mc: [
+                { q: "1894年11月，孫中山在下列哪一地方聯合當地華僑創立中國近代第一個革命團體「興中會」？", options: ["香港", "檀香山", "東京", "廣州"], ans: 1, exp: "1894年11月，孫中山在美國檀香山聯合華僑創立「興中會」，次年才在香港成立總會。" },
+                { q: "1895年2月，興中會總會在香港成立，當時被推選為總會會長的是哪一位革命志士？", options: ["孫中山", "楊衢雲", "陸皓東", "陳少白"], ans: 1, exp: "興中會總會於香港中環士丹頓街（乾亨行）成立，與輔仁文社合併，楊衢雲任會長，孫中山任秘書。" },
+                { q: "設計「青天白日旗」，並在1895年廣州起義中事敗被捕犧牲、被孫中山譽為「中國為共和革命而犧牲的第一人」的是誰？", options: ["鄭士良", "史堅如", "陸皓東", "林覺民"], ans: 2, exp: "陸皓東設計青天白日旗，於1895年10月廣州起義消息洩露後被捕殉難。" },
+                { q: "1900年八國聯軍之役期間，孫中山派遣哪一位革命黨人聯絡會黨，在廣東惠州三洲田策動起義？", options: ["鄭士良", "黃興", "倪映典", "鄧子瑜"], ans: 0, exp: "1900年10月，孫中山派鄭士良聯絡會黨發動「惠州起義」，奮戰月餘後因彈盡援絕而解散。" },
+                { q: "1900年惠州起義期間，哪一位革命志士在廣州挖掘地道、企圖炸死兩廣總督德壽以作響應，最終事敗犧牲？", options: ["陸皓東", "溫生才", "史堅如", "徐錫麟"], ans: 2, exp: "史堅如在廣州謀炸兩廣總督以響應惠州起義，不幸事敗被捕就義。" },
+                { q: "清末革命團體「華興會」於1904年在湖南長沙成立，其主要創辦人及會長是誰？", options: ["蔡元培", "黃興", "章炳麟", "孫武"], ans: 1, exp: "1904年黃興、陳天華、宋教仁等人在長沙創立「華興會」，由黃興擔任會長。" },
+                { q: "1904年在上海成立的革命團體「光復會」，推舉了哪一位學者擔任首任會長？", options: ["蔡元培", "秋瑾", "徐錫麟", "陶成章"], ans: 0, exp: "光復會於1904年在上海成立，由蔡元培出任會長，成員包括徐錫麟、秋瑾、章太炎等。" },
+                { q: "1905年8月，孫中山把興中會、華興會、光復會合組為「中國同盟會」，其成立地點及總部設於何處？", options: ["日本橫濱", "日本東京", "新加坡", "香港"], ans: 1, exp: "1905年8月，中國同盟會在日本東京正式成立，並以東京為總部。" },
+                { q: "孫中山在同盟會機關報《民報》的〈發刊詞〉中，首次系統地提出哪一革命理論綱領？", options: ["師夷長技以制夷", "中體西用", "三民主義", "五族共和"], ans: 2, exp: "1905年11月，孫中山在《民報》創刊號〈發刊詞〉中概括出民族、民權、民生「三民主義」。" },
+                { q: "著作《革命軍》一書，公開抨擊清廷專制並號召建立「中華共和國」，後因「蘇報案」死於上海獄中的青年革命家是誰？", options: ["鄒容", "陳天華", "章炳麟", "宋教仁"], ans: 0, exp: "留日學生鄒容著《革命軍》，銷量逾百萬冊，居清末革命書刊之首，後因《蘇報》案瘐死獄中。" },
+                { q: "清末革命宣傳家陳天華撰寫了哪兩部通俗小冊子，揭露清廷已淪為「洋人的朝廷」，在湖北新軍中流傳極廣？", options: ["《革命軍》、《大同書》", "《猛回頭》、《警世鐘》", "《盛世危言》、《勸學篇》", "《變法通議》、《新學偽經考》"], ans: 1, exp: "陳天華於1903年著《猛回頭》及《警世鐘》，以通俗文筆痛陳瓜分危機，深刻影響湖北新軍。" },
+                { q: "1905至1907年間，革命派與立憲派展開大論戰，雙方分別以哪兩份報刊作為主要陣地？", options: ["《民報》與《新民叢報》", "《蘇報》與《時務報》", "《國聞報》與《強學報》", "《中國日報》與《申報》"], ans: 0, exp: "革命派以《民報》（胡漢民、汪精衛等）與立憲派《新民叢報》（梁啟超）展開激烈筆戰。" },
+                { q: "1906年，同盟會乘湖南水災，在湖南與江西交界發動了哪一次大規模武裝起義？", options: ["鎮南關之役", "萍瀏醴之役", "潮州黃崗之役", "防城之役"], ans: 1, exp: "1906年同盟會在湖南瀏陽、醴陵及江西萍鄉三地同時起事，史稱「萍瀏醴之役」。" },
+                { q: "1907年，光復會會員徐錫麟與「鑑湖女俠」秋瑾分別在下列哪兩個省份策劃起義，最終事洩殉難？", options: ["廣東、廣西", "湖北、湖南", "安徽、浙江", "江蘇、江西"], ans: 2, exp: "徐錫麟在安徽安慶刺殺巡撫恩銘起義，秋瑾在浙江紹興大通師範學堂準備響應，二人先後殉難。" },
+                { q: "1911年4月27日（農曆三月廿九日），由黃興率領先鋒隊進攻兩廣總督衙門的起義，史稱甚麼事件？", options: ["廣州新軍之役", "廣州黃花崗起義", "惠州七女湖起義", "武昌起義"], ans: 1, exp: "1911年4月27日黃興率隊起義，死傷慘重，八十六名烈士中七十二人遺骸葬於廣州黃花崗。" },
+                { q: "在廣州黃花崗起義中犧牲，並留下感人至深〈與妻訣別書〉的同盟會烈士是誰？", options: ["林覺民", "陸皓東", "倪映典", "史堅如"], ans: 0, exp: "福建籍同盟會會員林覺民參與黃花崗起義被捕就義，其〈與妻訣別書〉傳頌後世。" },
+                { q: "1911年5月，清廷成立「責任內閣」，十三名大臣中皇族佔五人，被時人譏為何稱？", options: ["軍機內閣", "皇族內閣", "立憲內閣", "滿漢內閣"], ans: 1, exp: "慶親王奕劻內閣中滿人佔八名（皇族五名），被譏為「皇族內閣」，令立憲派大失所望。" },
+                { q: "1911年5月，清廷郵傳部尚書是誰策劃頒佈「鐵路國有」政策，強收商辦鐵路路權並出賣予列強？", options: ["盛宣懷", "袁世凱", "趙爾豐", "端方"], ans: 0, exp: "郵傳部尚書盛宣懷力主向四國銀行團借款並推行「鐵路國有」，引發川、粵、鄂、湘保路風潮。" },
+                { q: "1911年，在「保路風潮」中血腥鎮壓請願民眾、釀成「成都慘案」的四川總督是誰？", options: ["瑞澂", "趙爾豐", "榮祿", "張之洞"], ans: 1, exp: "四川總督趙爾豐下令開槍鎮壓成都請願民眾，造成「成都慘案」，直接激起四川武裝反抗。" },
+                { q: "辛亥革命前夕，在湖北新軍中積極進行革命宣傳與組織工作的兩個主要革命團體是甚麼？", options: ["興中會、華興會", "光復會、輔仁文社", "文學社、共進會", "強學會、保國會"], ans: 2, exp: "蔣翊武領導的「文學社」與孫武、焦達峰等人的「共進會」深入湖北新軍策動起義。" },
+                { q: "1911年10月9日，哪一位革命黨人在漢口俄租界製造炸彈時不慎爆炸，導致起義名冊洩露？", options: ["熊秉坤", "孫武", "蔣翊武", "黎元洪"], ans: 1, exp: "共進會領導人孫武在漢口俄租界配製炸彈失慎爆炸，俄巡捕搜去名冊交予清廷，迫使起義提前。" },
+                { q: "1911年10月10日晚，率先在武昌發難、佔領楚望台軍械庫的湖北新軍工程第八營總代表是誰？", options: ["熊秉坤", "黎元洪", "蔡濟民", "劉復基"], ans: 0, exp: "10月10日晚，新軍工程第八營總代表熊秉坤率部發難，打響武昌起義第一槍。" },
+                { q: "武昌起義爆發時，棄城狼狽逃走的湖廣總督是誰？", options: ["瑞澂", "趙爾豐", "奕劻", "載灃"], ans: 0, exp: "起義軍攻打湖廣總督署時，湖廣總督瑞澂鑿牆逃走，躲入長江兵艦。" },
+                { q: "1911年10月11日，湖北軍政府在武昌成立，起義軍推舉了哪一位原清軍新軍協統擔任都督？", options: ["黎元洪", "袁世凱", "黃興", "湯化龍"], ans: 0, exp: "革命黨人因群龍無首，遂推舉原湖北新軍協統黎元洪出任湖北軍政府都督。" },
+                { q: "武昌起義成功後，全國各省紛紛響應，最先宣佈脫離清廷而獨立的三個省份是哪三個？", options: ["湖南、陝西、江西", "廣東、廣西、雲南", "四川、貴州、浙江", "江蘇、安徽、福建"], ans: 0, exp: "武昌起義後，湖南、陝西、江西三省率先宣佈獨立，隨後全國二十四省區中大多數宣告獨立。" },
+                { q: "武昌起義爆發時身處美國的孫中山，得悉消息後先赴哪一個歐洲國家游說政府對中國革命保持中立？", options: ["法國", "德國", "英國", "俄國"], ans: 2, exp: "孫中山認為英國是列強外交關鍵，遂親赴倫敦游說英國停止貸款予清廷及保持中立。" },
+                { q: "1911年12月底，十七省代表會議在下列哪一城市舉行，推選孫中山為中華民國臨時大總統？", options: ["武昌", "上海", "南京", "廣州"], ans: 2, exp: "革命軍於12月初攻克南京後，十七省代表於南京開會，推選孫中山為臨時大總統。" },
+                { q: "1912年1月1日（民國元年元旦），孫中山在南京宣誓就職，同時改用公曆並制定哪一種旗幟為國旗？", options: ["青天白日旗", "十八星旗", "五色旗", "黃龍旗"], ans: 2, exp: "南京臨時政府定紅、黃、藍、白、黑「五色旗」為中華民國國旗，象徵漢滿蒙回藏五族共和。" },
+                { q: "在誰的脅迫與南北議和壓力下，清末帝溥儀於1912年2月12日頒佈退位詔書，結束滿清二百六十八年統治？", options: ["袁世凱", "李鴻章", "榮祿", "載漪"], ans: 0, exp: "清廷起用北洋新軍首領袁世凱，袁氏借革命聲勢脅迫清室，清末帝溥儀於1912年2月12日宣佈遜位。" },
+                { q: "1906年孫中山在東南亞成立同盟會分會，成為南洋策劃革命的中心，該南洋重鎮位於何處？", options: ["新加坡", "馬尼拉", "雅加達", "曼谷"], ans: 0, exp: "1906年孫中山在新加坡成立同盟會分會（陳楚楠任首任會長），成為南洋籌款與策劃革命的樞紐。" }
+            ],
+            fill: [
+                { q: "孫中山是廣東______縣人，少年時曾遠赴美國檀香山求學，接觸西方民主思想。", ans: ["香山", "香山縣"], hint: "提示：今廣東省中山市舊稱（兩字地名）" },
+                { q: "1894年甲午戰爭前夕，孫中山曾北上天津上書北洋大臣______，提出「人盡其才，地盡其利，物盡其用，貨暢其流」的改革建議，惜未獲重視。", ans: ["李鴻章"], hint: "提示：晚清洋務運動後期最重要領袖（三字人名）" },
+                { q: "1894年11月，孫中山在______創立了中國近代第一個革命團體「興中會」。", ans: ["檀香山", "夏威夷檀香山"], hint: "提示：美國夏威夷首府（三字地名）" },
+                { q: "興中會創立時，以「驅除韃虜，恢復中華，創立______」為入會誓詞與宗旨。", ans: ["合眾政府"], hint: "提示：仿效美國政體的名稱（四字）" },
+                { q: "1895年2月，孫中山在香港把興中會與楊衢雲創立的「______」合併，成立興中會總會。", ans: ["輔仁文社"], hint: "提示：香港早期愛國知識分子社團（四字）" },
+                { q: "在香港讀書期間，孫中山與陳少白、尢列、楊鶴齡四人日夕暢談反清革命，時人稱他們為「______」。", ans: ["四大寇"], hint: "提示：清廷眼中的四名叛逆青年（三字）" },
+                { q: "1895年10月，興中會首次發動「______起義」，惜因事機洩露而失敗，陸皓東被捕犧牲。", ans: ["廣州"], hint: "提示：廣東省省會（兩字地名）" },
+                { q: "1900年10月，孫中山派鄭士良聯絡會黨發動「______起義」，起義軍在三洲田屢敗清軍。", ans: ["惠州"], hint: "提示：廣東東部城市（兩字地名）" },
+                { q: "1904年，黃興、陳天華、宋教仁等人在湖南______成立革命團體「華興會」。", ans: ["長沙"], hint: "提示：湖南省省會（兩字地名）" },
+                { q: "1904年，蔡元培、徐錫麟、秋瑾等人在______成立革命團體「光復會」。", ans: ["上海"], hint: "提示：長江口著名通商大埠（兩字地名）" },
+                { q: "1905年8月，孫中山在日本______整合興中會、華興會、光復會，成立全國統一的革命政黨「中國同盟會」。", ans: ["東京"], hint: "提示：日本首都（兩字地名）" },
+                { q: "中國同盟會的十六字政治綱領為：「驅除韃虜，恢復中華，創立民國，______」。", ans: ["平均地權"], hint: "提示：對應民生主義的土地政策（四字）" },
+                { q: "中國同盟會成立時，公推孫中山為總理，並推舉______擔任執行部庶務，負責實際組織與起義策劃。", ans: ["黃興"], hint: "提示：與孫中山並稱「孫黃」的革命領袖（兩字人名）" },
+                { q: "中國同盟會的機關報名為《______》，由孫中山撰寫〈發刊詞〉提出三民主義。", ans: ["民報"], hint: "提示：1905年在東京創刊的革命報刊（兩字）" },
+                { q: "孫中山提出的「三民主義」，具體包括民族主義、______主義和民生主義。", ans: ["民權"], hint: "提示：主張推翻君主專制、建立共和的主義（兩字）" },
+                { q: "清末革命宣傳著作《革命軍》的作者是______，他在書中號召建立「中華共和國」。", ans: ["鄒容"], hint: "提示：年僅二十歲死於上海獄中的四川青年（兩字人名）" },
+                { q: "1903年，革命家______撰寫《猛回頭》和《警世鐘》，以通俗白話喚醒國人反清救國。", ans: ["陳天華"], hint: "提示：後在日本大森海灣投海殉國的湖南志士（三字人名）" },
+                { q: "1905至1907年間，立憲派主筆______在《新民叢報》發表文章，與革命派《民報》展開大論戰。", ans: ["梁啟超"], hint: "提示：康有為弟子、號飲冰室主人（三字人名）" },
+                { q: "1907年，光復會女革命家______在浙江紹興大通師範學堂策劃起義，事敗從容就義。", ans: ["秋瑾"], hint: "提示：別號「鑑湖女俠」（兩字人名）" },
+                { q: "1907年12月，黃明堂佔領廣西______炮台，孫中山、黃興親臨指揮炮擊清軍。", ans: ["鎮南關"], hint: "提示：中越邊境著名關隘（三字地名）" },
+                { q: "1911年4月27日，黃興率領敢死隊進攻廣州兩廣總督署，事敗後七十二烈士遺骸合葬於______。", ans: ["黃花崗", "黃花岡"], hint: "提示：廣州白雲山南麓山崗名（三字地名）" },
+                { q: "1911年5月，清廷宣佈「______」政策，強行收回川、粵、鄂、湘四省商辦鐵路並出賣予列強，激起保路運動。", ans: ["鐵路國有"], hint: "提示：由盛宣懷策劃的收歸路權政策（四字）" },
+                { q: "1911年9月，四川總督______下令開槍鎮壓保路請願群眾，製造了震驚全國的「成都慘案」。", ans: ["趙爾豐"], hint: "提示：鎮壓四川保路運動的清廷總督（三字人名）" },
+                { q: "武昌起義前夕，湖北兩個革命團體「______」與「共進會」組成聯合指揮機構，策動新軍起事。", ans: ["文學社"], hint: "提示：蔣翊武擔任社長的湖北新軍團體（三字）" },
+                { q: "1911年10月10日晚，武昌新軍工程第八營首先發難，迅速佔領______軍械庫，取得大批槍彈。", ans: ["楚望台"], hint: "提示：武昌城內軍械庫所在地（三字地名）" },
+                { q: "武昌起義一夜激戰後，革命軍先佔領武昌，隨即光復漢陽與______，完全控制武漢三鎮。", ans: ["漢口"], hint: "提示：武漢三鎮之一，位於長江與漢水交匯處（兩字地名）" },
+                { q: "1911年10月11日，湖北軍政府在武昌成立，推舉原新軍協統______為都督，宣佈脫離清廷獨立。", ans: ["黎元洪"], hint: "提示：武昌起義後被推為都督的清軍將領（三字人名）" },
+                { q: "1912年1月1日，孫中山在______宣誓就任中華民國臨時大總統，宣告中華民國正式成立。", ans: ["南京"], hint: "提示：中華民國臨時政府所在地（兩字地名）" },
+                { q: "中華民國臨時政府成立後，改用陽曆（公曆），並以1912年為______元年。", ans: ["中華民國", "民國"], hint: "提示：新建立的亞洲第一個民主共和國國號（四字）" },
+                { q: "1912年2月12日，清朝末帝______正式頒佈退位詔書，統治中國二百六十八年的清朝宣告結束。", ans: ["溥儀", "宣統帝"], hint: "提示：年號宣統的清朝最後一位皇帝（兩字人名）" }
+            ],
+            order: [
+                { q: "按時序排列下列清末「改革與革命」重大歷史事件的先後次序：", items: ["洋務運動展開（設總理衙門）", "中日甲午戰爭爆發", "戊戌維新（百日維新）", "辛亥革命（武昌起義）"], exp: "時序：1861年洋務運動 → 1894年甲午戰爭 → 1898年戊戌維新 → 1911年辛亥革命。" },
+                { q: "按時序排列孫中山早期求學與投身革命的經歷：", items: ["遠赴檀香山就讀西式學校", "入讀香港西醫書院並與「四大寇」談革命", "北上天津上書李鴻章陳述改革", "在檀香山創立興中會"], exp: "時序：1879年赴檀香山 → 1887年入香港西醫書院 → 1894年春上書李鴻章 → 1894年11月創興中會。" },
+                { q: "按時序排列興中會早期成立與武裝起義的經過：", items: ["檀香山興中會成立", "香港興中會總會成立", "第一次廣州起義（陸皓東殉難）", "惠州起義（鄭士良策動）"], exp: "時序：1894年11月檀香山創會 → 1895年2月香港設總會 → 1895年10月廣州起義 → 1900年10月惠州起義。" },
+                { q: "按時序排列清末各主要革命團體的創立先後：", items: ["興中會（孫中山）", "華興會（黃興）", "光復會（蔡元培）", "中國同盟會（東京合組）"], exp: "時序：1894年興中會 → 1904年2月華興會 → 1904年11月光復會 → 1905年8月中國同盟會。" },
+                { q: "按時序排列下列重要歷史文獻或書刊的發表與出版：", items: ["鄒容著《革命軍》出版", "孫中山撰《民報》〈發刊詞〉", "清廷頒佈《欽定憲法大綱》", "清帝溥儀頒佈《退位詔書》"], exp: "時序：1903年《革命軍》 → 1905年11月《民報》發刊詞 → 1908年《欽定憲法大綱》 → 1912年2月退位詔書。" },
+                { q: "按時序排列下列武裝起義的發生先後：", items: ["1895年廣州起義", "1906年萍瀏醴之役", "1907年安慶之役（徐錫麟、秋瑾）", "1911年廣州黃花崗起義"], exp: "時序：1895年廣州起義 → 1906年萍瀏醴之役 → 1907年安慶之役 → 1911年4月黃花崗起義。" },
+                { q: "按時序排列同盟會成立後（1906–1910年）的武裝起義：", items: ["萍瀏醴之役", "鎮南關之役", "雲南河口之役", "廣州新軍之役（倪映典殉難）"], exp: "時序：1906年萍瀏醴之役 → 1907年12月鎮南關之役 → 1908年4月河口之役 → 1910年2月廣州新軍之役。" },
+                { q: "按時序排列清末「預備立憲」破產的關鍵事件：", items: ["清廷宣佈「預備立憲」", "頒佈《欽定憲法大綱》", "立憲派發起多次國會請願運動", "成立「皇族內閣」"], exp: "時序：1906年宣佈預備立憲 → 1908年《欽定憲法大綱》 → 1910年國會請願 → 1911年5月皇族內閣。" },
+                { q: "按時序排列1911年四川「保路風潮」演變為革命導火線的經過：", items: ["清廷向四國銀行團借款並宣佈「鐵路國有」", "四川民眾成立「保路同志會」罷市罷課", "四川總督趙爾豐製造「成都慘案」", "清廷急調湖北新軍入川鎮壓"], exp: "時序：1911年5月鐵路國有 → 6月成立保路同志會 → 9月成都慘案 → 調湖北新軍入川致武昌空虛。" },
+                { q: "按時序排列1911年「武昌起義」爆發前後的關鍵事件：", items: ["文學社與共進會組成聯合指揮機構", "孫武在漢口俄租界製炸彈失慎爆炸", "熊秉坤率新軍工程營攻佔楚望台軍械庫", "黎元洪被推舉為湖北軍政府都督"], exp: "時序：1911年9月兩會聯合 → 10月9日炸彈失慎 → 10月10日晚起義發難 → 10月11日成立湖北軍政府。" },
+                { q: "按時序排列武昌起義後，革命黨人光復武漢三鎮的順序：", items: ["攻佔楚望台軍械庫", "攻打湖廣總督署（瑞澂逃走）", "光復武昌城", "進佔漢陽與漢口"], exp: "時序：10月10日晚佔楚望台 → 激戰攻督署 → 10月11日晨光復武昌 → 隨即攻佔漢陽、漢口。" },
+                { q: "按時序排列1911年10月至1912年2月辛亥革命的重大進程：", items: ["武昌起義爆發", "湖南、陝西、江西三省率先獨立", "革命軍攻克南京", "孫中山就任中華民國臨時大總統"], exp: "時序：10月10日武昌起義 → 10月下旬三省獨立 → 12月初攻克南京 → 1912年1月1日孫中山就職。" },
+                { q: "按時序排列武昌起義爆發後孫中山的外交與回國行程：", items: ["在美國得悉武昌起義成功", "親赴英國倫敦游說英政府保持中立", "抵達上海並被十七省代表推選為臨時大總統", "在南京宣誓就職中華民國臨時大總統"], exp: "時序：在美聞訊 → 赴英外交游說 → 12月底返抵上海獲選 → 1912年1月1日南京就職。" },
+                { q: "按時序排列晚清不同救國思想口號出現的先後：", items: ["師夷長技以制夷（魏源）", "中學為體，西學為用（洋務派）", "變法維新，君主立憲（康梁）", "驅除韃虜，創立民國（孫中山）"], exp: "時序：鴉片戰爭後「師夷長技」 → 1860年代「中體西用」 → 1890年代「變法立憲」 → 1894/1905年「創立民國」。" },
+                { q: "按時序排列清末「革命派與立憲派論戰」相關事件：", items: ["康有為、梁啟超在海外成立「保皇會」", "同盟會創辦《民報》宣揚三民主義", "《民報》與《新民叢報》展開大論戰", "立憲派對「皇族內閣」失望並轉向支持革命"], exp: "時序：1899年保皇會成立 → 1905年《民報》創刊 → 1905-07年兩報論戰 → 1911年皇族內閣後立憲派轉向。" },
+                { q: "按時序排列孫中山革命組織名稱與基地的演變：", items: ["檀香山興中會", "香港興中會總會（乾亨行）", "東京中國同盟會總部", "南京中華民國臨時政府"], exp: "時序：1894年檀香山 → 1895年香港 → 1905年東京 → 1912年南京。" },
+                { q: "按時序排列下列清朝末期年號與重大事件的對應：", items: ["光緒二十年（1894）：成立興中會", "光緒二十四年（1898）：戊戌變法失敗", "光緒三十一年（1905）：成立中國同盟會", "宣統三年（1911）：爆發武昌起義"], exp: "時序：1894光緒二十年 → 1898光緒二十四年 → 1905光緒三十一年 → 1911宣統三年。" },
+                { q: "按時序排列下列革命烈士犧牲的先後次序：", items: ["陸皓東（廣州起義）", "史堅如（謀炸兩廣總督）", "秋瑾（紹興起義）", "林覺民（廣州黃花崗起義）"], exp: "時序：1895年陸皓東 → 1900年史堅如 → 1907年秋瑾 → 1911年4月林覺民。" },
+                { q: "按時序排列清末新軍由建立到倒戈支持革命的過程：", items: ["袁世凱在天津小站編練「新建陸軍」", "清廷設練兵處在各省編練「新軍」", "文學社與共進會深入湖北新軍宣傳革命", "湖北新軍在武昌首義推翻清廷統治"], exp: "時序：1895年小站練兵 → 1903年設練兵處編新軍 → 1907年後革命團體滲透新軍 → 1911年10月武昌首義。" },
+                { q: "按時序排列列強侵華與清末革命浪潮高漲的因果鏈：", items: ["中日甲午戰爭慘敗（興中會成立）", "八國聯軍之役與《辛丑條約》（革命思想傳播）", "日俄戰爭「日勝俄敗」（清廷宣佈預備立憲）", "武昌起義爆發（孫中山赴英游說列強中立）"], exp: "時序：1894甲午戰爭 → 1900八國聯軍 → 1904-05日俄戰爭 → 1911武昌起義。" },
+                { q: "按時序排列民國建立與清朝滅亡的最後關鍵步驟：", items: ["十七省代表在南京推選孫中山為臨時大總統", "孫中山在南京就職並宣告中華民國成立", "孫中山提出以清帝退位為條件讓位予袁世凱", "清帝溥儀頒佈退位詔書，清朝正式結束"], exp: "時序：1911年12月底選舉 → 1912年1月1日就職 → 1月南北議和商定讓位條件 → 2月12日清帝退位。" },
+                { q: "按時序排列下列廣東地區反清武裝起義的發生先後：", items: ["1895年第一次廣州起義", "1900年惠州三洲田起義", "1907年潮州黃崗起義", "1911年廣州黃花崗起義"], exp: "時序：1895廣州 → 1900惠州 → 1907年5月潮州黃崗 → 1911年4月黃花崗。" },
+                { q: "按時序排列「黃花崗起義」（1911年）的籌備與經過：", items: ["孫中山在檳榔嶼召開同盟會高層會議決定起義", "成立香港統籌部並向海外華僑籌募鉅款", "溫生才槍殺廣州將軍孚琦令清軍加強戒備", "黃興率領先鋒隊進攻兩廣總督衙門"], exp: "時序：1910年11月檳榔嶼會議 → 香港設統籌部 → 1911年4月8日溫生才刺孚琦 → 4月27日起義爆發。" },
+                { q: "按時序排列袁世凱在晚清政局中的關鍵動向：", items: ["戊戌政變中向榮祿告密出賣光緒帝", "八國聯軍後任直隸總督擴編北洋六鎮", "武昌起義後獲清廷起用為內閣總理大臣", "脅迫清帝溥儀退位並接任臨時大總統"], exp: "時序：1898年戊戌告密 → 1901年擴編北洋新軍 → 1911年11月組閣 → 1912年2月迫清帝退位。" },
+                { q: "按時序排列清末鐵路風潮與武昌起義的連鎖反應：", items: ["川、粵、鄂、湘四省商民集資自辦鐵路", "盛宣懷策劃「鐵路國有」並向四國銀行團借款", "四川爆發「成都慘案」及保路同志軍起義", "湖北革命黨人乘武昌守備空虛提前發難"], exp: "時序：商民自辦鐵路 → 1911年5月鐵路國有 → 9月成都慘案 → 10月10日武昌起義。" },
+                { q: "按時序排列香港與孫中山革命活動的歷史淵源：", items: ["入讀香港中央書院（皇仁書院前身）及西醫書院", "成立香港興中會總會（士丹頓街乾亨行）", "創辦香港《中國日報》宣傳革命", "設立同盟會香港統籌部策劃黃花崗起義"], exp: "時序：1884-1892年香港求學 → 1895年設興中會總會 → 1900年創《中國日報》 → 1911年設統籌部。" },
+                { q: "按時序排列三民主義中「三大革命」的對應目標：", items: ["民族革命（推翻滿清統治，恢復中華）", "政治革命（推翻君主專制，建立民國）", "社會革命（平均地權，消除貧富懸殊）", "五族共和（漢、滿、蒙、回、藏平等一家）"], exp: "在《民報》發刊詞中，孫中山依序提出民族、民權、民生三大主義，民國成立後實行五族共和。" },
+                { q: "按時序排列清末不同政治派別的興衰演變：", items: ["洋務派（奕訢、李鴻章主導器物改革）", "維新派（康有為、梁啟超推動百日維新）", "立憲派（張謇等請願速開國會）", "革命派（孫中山領導辛亥革命建立民國）"], exp: "時序：1860-90年代洋務派 → 1898年維新派 → 1906-11年立憲派 → 1911年革命派成功。" },
+                { q: "按時序排列武昌起義後湖北軍政府建立與鞏固政權的措施：", items: ["推舉黎元洪為湖北軍政府都督", "廢除清朝宣統年號，改用黃帝紀元", "照會漢口各國領事承認舊約以換取列強中立", "漢陽、漢口保衛戰（黃興任戰時總司令）"], exp: "時序：10月11日黎元洪任都督 → 改用黃帝紀元 → 照會外國領事 → 10月底至11月陽夏保衛戰。" },
+                { q: "按時序排列辛亥革命後中國政體與社會的歷史轉變：", items: ["武昌首義打響推翻帝制第一槍", "各省紛紛獨立使清廷統治土崩瓦解", "南京臨時政府成立並制定五色國旗", "清帝遜位結束二千多年君主專制統治"], exp: "時序：1911年10月10日武昌首義 → 10-11月各省獨立 → 1912年1月1日民國成立 → 2月12日清帝退位。" }
+            ]
+        };
+
+        // ==========================================
+        // 應用程式狀態管理
+        // ==========================================
+        let currentMode = 'mc'; // 'mc' | 'fill' | 'order'
+        let currentIndex = { mc: 0, fill: 0, order: 0 };
+
+        // 儲存作答紀錄
+        const userState = {
+            mc: Array(30).fill(null), // 存選擇的 index (0-3)
+            fill: Array(30).fill(null), // 存 { input: string, isCorrect: boolean }
+            order: quizData.order.map(q => {
+                // 為每道排序題生成初始打亂順序，並記錄是否已提交
+                let shuffled = q.items.map((text, idx) => ({ text, origIdx: idx }));
+                // 確保打亂後不等於原本正確順序
+                do {
+                    for (let i = shuffled.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                    }
+                } while (shuffled.every((item, idx) => item.origIdx === idx));
+                return { currentOrder: shuffled, submitted: false, isCorrect: false };
+            })
+        };
+
+        // ==========================================
+        // 核心功能函式
+        // ==========================================
+        function switchMode(mode) {
+            currentMode = mode;
+            ['mc', 'fill', 'order'].forEach(m => {
+                const tab = document.getElementById(`tab-${m}`);
+                if (m === mode) {
+                    tab.classList.add('selected');
+                } else {
+                    tab.classList.remove('selected');
+                }
+            });
+
+            const descMap = {
+                mc: '四選一單項選擇題（點擊選項即時核對）',
+                fill: '歷史專有名詞填充題（輸入人名、地名或事件名）',
+                order: '史事時序排列題（點擊「上移 / 下移」調整先後次序）'
+            };
+            document.getElementById('modeDesc').textContent = descMap[mode];
+            renderAll();
+        }
+
+        function updateStats() {
+            // 計算各組得分
+            const mcScore = userState.mc.filter((ans, i) => ans === quizData.mc[i].ans).length;
+            const fillScore = userState.fill.filter(item => item && item.isCorrect).length;
+            const orderScore = userState.order.filter(item => item.submitted && item.isCorrect).length;
+
+            document.getElementById('badge-mc').textContent = `(${mcScore}/30)`;
+            document.getElementById('badge-fill').textContent = `(${fillScore}/30)`;
+            document.getElementById('badge-order').textContent = `(${orderScore}/30)`;
+
+            const activeScore = currentMode === 'mc' ? mcScore : (currentMode === 'fill' ? fillScore : orderScore);
+            document.getElementById('scoreDisplay').textContent = `${activeScore} / 30`;
+        }
+
+        function renderNavigator() {
+            const nav = document.getElementById('qNavigator');
+            const idx = currentIndex[currentMode];
+            document.getElementById('progressText').textContent = `第 ${idx + 1} / 30 題`;
+
+            let html = '';
+            for (let i = 0; i < 30; i++) {
+                let statusClass = 'bg-white/60 text-slate-700 border-white/80';
+                if (currentMode === 'mc' && userState.mc[i] !== null) {
+                    statusClass = userState.mc[i] === quizData.mc[i].ans
+                        ? 'bg-emerald-500 text-white border-emerald-300'
+                        : 'bg-rose-500 text-white border-rose-300';
+                } else if (currentMode === 'fill' && userState.fill[i] !== null) {
+                    statusClass = userState.fill[i].isCorrect
+                        ? 'bg-emerald-500 text-white border-emerald-300'
+                        : 'bg-rose-500 text-white border-rose-300';
+                } else if (currentMode === 'order' && userState.order[i].submitted) {
+                    statusClass = userState.order[i].isCorrect
+                        ? 'bg-emerald-500 text-white border-emerald-300'
+                        : 'bg-rose-500 text-white border-rose-300';
+                }
+
+                const activeRing = (i === idx) ? 'ring-2 ring-teal-600 scale-105 font-extrabold' : 'font-medium';
+                html += `<button type="button" onclick="jumpTo(${i})" class="min-w-[38px] h-[38px] rounded-xl border text-xs flex-shrink-0 transition-all ${statusClass} ${activeRing}">${i + 1}</button>`;
+            }
+            nav.innerHTML = html;
+
+            // 自動將當前題號捲動至可視範圍中央
+            const activeBtn = nav.children[idx];
+            if (activeBtn) {
+                activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            }
+        }
+
+        function renderQuestion() {
+            const container = document.getElementById('questionContainer');
+            // 觸發微動畫重播
+            container.classList.remove('animate-question');
+            void container.offsetWidth;
+            container.classList.add('animate-question');
+
+            const idx = currentIndex[currentMode];
+
+            if (currentMode === 'mc') {
+                const item = quizData.mc[idx];
+                const userAns = userState.mc[idx];
+                const labels = ['A', 'B', 'C', 'D'];
+
+                let optionsHtml = item.options.map((opt, oIdx) => {
+                    let btnClass = 'liquid-btn';
+                    if (userAns !== null) {
+                        if (oIdx === item.ans) btnClass += ' correct';
+                        else if (oIdx === userAns) btnClass += ' wrong';
+                    }
+                    return `
+                        <button type="button" onclick="selectMC(${oIdx})" class="${btnClass} w-full text-left rounded-2xl p-3.5 sm:p-4 flex items-center gap-3 font-medium text-base">
+                            <span class="w-8 h-8 rounded-xl bg-black/10 flex items-center justify-center font-bold text-sm flex-shrink-0">${labels[oIdx]}</span>
+                            <span class="leading-snug">${opt}</span>
+                        </button>
+                    `;
+                }).join('');
+
+                let feedbackHtml = '';
+                if (userAns !== null) {
+                    const isRight = userAns === item.ans;
+                    feedbackHtml = `
+                        <div class="mt-4 p-4 rounded-2xl ${isRight ? 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-950' : 'bg-rose-500/15 border border-rose-500/30 text-rose-950'} text-sm leading-relaxed">
+                            <div class="font-bold mb-1">${isRight ? '✓ 答對了！' : `✗ 答錯了，正確答案是 ${labels[item.ans]}（${item.options[item.ans]}）`}</div>
+                            <div class="opacity-90">${item.exp}</div>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = `
+                    <div>
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="px-2.5 py-1 rounded-lg bg-teal-600/15 text-teal-800 text-xs font-bold">選擇題 ${idx + 1}</span>
+                        </div>
+                        <h2 class="text-lg sm:text-xl font-bold text-slate-800 leading-relaxed mb-5">${item.q}</h2>
+                        <div class="grid grid-cols-1 gap-2.5">${optionsHtml}</div>
+                    </div>
+                    ${feedbackHtml}
+                `;
+            } 
+            else if (currentMode === 'fill') {
+                const item = quizData.fill[idx];
+                const record = userState.fill[idx];
+                const val = record ? record.input : '';
+
+                let feedbackHtml = '';
+                if (record) {
+                    feedbackHtml = `
+                        <div class="mt-4 p-4 rounded-2xl ${record.isCorrect ? 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-950' : 'bg-rose-500/15 border border-rose-500/30 text-rose-950'} text-sm leading-relaxed">
+                            <div class="font-bold mb-1">${record.isCorrect ? '✓ 完全正確！' : `✗ 答案未準確，標準答案為：「${item.ans[0]}」`}</div>
+                            <div class="opacity-90">作答提示：${item.hint}</div>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-2.5 py-1 rounded-lg bg-teal-600/15 text-teal-800 text-xs font-bold">填充題 ${idx + 1}</span>
+                            <span class="text-xs text-slate-500">${item.hint}</span>
+                        </div>
+                        <h2 class="text-lg sm:text-xl font-bold text-slate-800 leading-relaxed mb-5">${item.q}</h2>
+                        
+                        <div class="flex flex-col sm:flex-row gap-2.5">
+                            <input type="text" id="fillInput" value="${val}" placeholder="請輸入正確歷史專有名詞..." 
+                                onkeydown="if(event.key==='Enter') submitFill()"
+                                class="flex-1 min-h-[48px] px-4 py-3 rounded-2xl bg-white/80 border border-white focus:outline-none focus:ring-2 focus:ring-teal-500 text-base font-semibold text-slate-800 shadow-inner" />
+                            <button type="button" onclick="submitFill()" class="liquid-btn selected rounded-2xl px-6 py-3 font-bold text-base">
+                                提交核對
+                            </button>
+                        </div>
+                    </div>
+                    ${feedbackHtml}
+                `;
+            } 
+            else if (currentMode === 'order') {
+                const item = quizData.order[idx];
+                const state = userState.order[idx];
+
+                let listHtml = state.currentOrder.map((obj, pos) => {
+                    let cardStyle = 'bg-white/65 border-white/85';
+                    let statusTag = '';
+                    if (state.submitted) {
+                        if (obj.origIdx === pos) {
+                            cardStyle = 'bg-emerald-500/20 border-emerald-400 text-emerald-950';
+                            statusTag = `<span class="text-xs font-bold text-emerald-700 ml-2">✓ 順序正確</span>`;
+                        } else {
+                            cardStyle = 'bg-rose-500/20 border-rose-400 text-rose-950';
+                            statusTag = `<span class="text-xs font-bold text-rose-700 ml-2">✗ 應排第 ${obj.origIdx + 1}</span>`;
+                        }
+                    }
+
+                    return `
+                        <div class="flex items-center justify-between gap-2 p-3 sm:p-3.5 rounded-2xl border ${cardStyle} shadow-sm transition-all">
+                            <div class="flex items-center gap-3 flex-1 min-w-0">
+                                <span class="w-7 h-7 rounded-lg bg-teal-700/15 text-teal-900 font-extrabold text-xs flex items-center justify-center flex-shrink-0">${pos + 1}</span>
+                                <span class="font-semibold text-sm sm:text-base leading-snug break-words">${obj.text}${statusTag}</span>
+                            </div>
+                            ${!state.submitted ? `
+                                <div class="flex items-center gap-1.5 flex-shrink-0">
+                                    <button type="button" onclick="moveOrder(${pos}, -1)" ${pos === 0 ? 'disabled' : ''} 
+                                        class="liquid-btn rounded-xl w-11 h-11 flex items-center justify-center font-bold text-lg ${pos === 0 ? 'opacity-30 cursor-not-allowed' : 'text-teal-800'}" aria-label="上移">↑</button>
+                                    <button type="button" onclick="moveOrder(${pos}, 1)" ${pos === 3 ? 'disabled' : ''} 
+                                        class="liquid-btn rounded-xl w-11 h-11 flex items-center justify-center font-bold text-lg ${pos === 3 ? 'opacity-30 cursor-not-allowed' : 'text-teal-800'}" aria-label="下移">↓</button>
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+
+                let actionOrFeedbackHtml = '';
+                if (!state.submitted) {
+                    actionOrFeedbackHtml = `
+                        <div class="mt-4 flex justify-end">
+                            <button type="button" onclick="submitOrder()" class="liquid-btn selected rounded-2xl px-6 py-3 font-bold text-base w-full sm:w-auto">
+                                確認時序排列
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    actionOrFeedbackHtml = `
+                        <div class="mt-4 p-4 rounded-2xl ${state.isCorrect ? 'bg-emerald-500/15 border border-emerald-500/30 text-emerald-950' : 'bg-rose-500/15 border border-rose-500/30 text-rose-950'} text-sm leading-relaxed">
+                            <div class="font-bold mb-1">${state.isCorrect ? '✓ 時序完全正確！' : '✗ 排列有誤，請參考以下正確時序解析：'}</div>
+                            <div class="opacity-95">${item.exp}</div>
+                        </div>
+                    `;
+                }
+
+                container.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-2.5 py-1 rounded-lg bg-teal-600/15 text-teal-800 text-xs font-bold">排序題 ${idx + 1}</span>
+                            <span class="text-xs text-slate-500">由最早（1）至最晚（4）排列</span>
+                        </div>
+                        <h2 class="text-lg sm:text-xl font-bold text-slate-800 leading-relaxed mb-4">${item.q}</h2>
+                        <div class="space-y-2.5">${listHtml}</div>
+                    </div>
+                    ${actionOrFeedbackHtml}
+                `;
+            }
+
+            // 更新上/下一題按鈕狀態
+            document.getElementById('prevBtn').style.opacity = idx === 0 ? '0.45' : '1';
+            document.getElementById('nextBtn').textContent = idx === 29 ? '回到第 1 題 ↺' : '下一題 ›';
+        }
+
+        // ==========================================
+        // 互動事件處理
+        // ==========================================
+        function selectMC(optionIdx) {
+            const idx = currentIndex.mc;
+            userState.mc[idx] = optionIdx;
+            renderAll();
+        }
+
+        function submitFill() {
+            const idx = currentIndex.fill;
+            const inputEl = document.getElementById('fillInput');
+            if (!inputEl) return;
+            const rawVal = inputEl.value.trim();
+            if (!rawVal) {
+                inputEl.focus();
+                return;
+            }
+            // 繁簡或微異字寬鬆比對處理（例如「崗/岡」）
+            const normalize = str => str.replace(/\s+/g, '').replace(/岡/g, '崗');
+            const normInput = normalize(rawVal);
+            const validAnswers = quizData.fill[idx].ans.map(normalize);
+            const isCorrect = validAnswers.includes(normInput);
+
+            userState.fill[idx] = { input: rawVal, isCorrect };
+            renderAll();
+        }
+
+        function moveOrder(pos, direction) {
+            const idx = currentIndex.order;
+            const state = userState.order[idx];
+            if (state.submitted) return;
+            const targetPos = pos + direction;
+            if (targetPos < 0 || targetPos >= state.currentOrder.length) return;
+
+            const temp = state.currentOrder[pos];
+            state.currentOrder[pos] = state.currentOrder[targetPos];
+            state.currentOrder[targetPos] = temp;
+            renderQuestion();
+        }
+
+        function submitOrder() {
+            const idx = currentIndex.order;
+            const state = userState.order[idx];
+            state.submitted = true;
+            state.isCorrect = state.currentOrder.every((obj, pos) => obj.origIdx === pos);
+            renderAll();
+        }
+
+        function jumpTo(i) {
+            currentIndex[currentMode] = i;
+            renderAll();
+        }
+
+        function prevQuestion() {
+            if (currentIndex[currentMode] > 0) {
+                currentIndex[currentMode]--;
+                renderAll();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentIndex[currentMode] < 29) {
+                currentIndex[currentMode]++;
+            } else {
+                currentIndex[currentMode] = 0;
+            }
+            renderAll();
+        }
+
+        function resetCurrentMode() {
+            if (currentMode === 'mc') {
+                userState.mc = Array(30).fill(null);
+            } else if (currentMode === 'fill') {
+                userState.fill = Array(30).fill(null);
+            } else if (currentMode === 'order') {
+                userState.order = quizData.order.map(q => {
+                    let shuffled = q.items.map((text, idx) => ({ text, origIdx: idx }));
+                    do {
+                        for (let i = shuffled.length - 1; i > 0; i--) {
+                            const j = Math.floor(Math.random() * (i + 1));
+                            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+                        }
+                    } while (shuffled.every((item, idx) => item.origIdx === idx));
+                    return { currentOrder: shuffled, submitted: false, isCorrect: false };
+                });
+            }
+            currentIndex[currentMode] = 0;
+            renderAll();
+        }
+
+        function renderAll() {
+            updateStats();
+            renderNavigator();
+            renderQuestion();
+        }
+
+        // 初始化頁面
+        renderAll();
+    </script>
+</body>
+</html>
